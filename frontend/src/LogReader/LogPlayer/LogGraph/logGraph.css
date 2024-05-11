@@ -1,0 +1,30 @@
+.logGraph{
+    width: 85%;
+}
+.logGraph div{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.logGraph div{
+    width: 100%;
+}
+.logGraph div .graph443{
+    width: 90%;
+}
+.logGraph div .graph443:nth-child(1){
+    margin-right: 50px
+}
+.logGraph div .graph443:nth-child(3){
+    margin-top: 20px;
+} 
+.logGraph div .graph443 .title{
+    color: whitesmoke;
+    width: 100%;
+    text-align: center;
+    font-family: "JetBrains Mono";
+    font-size: 15px;
+    margin: 0
+}

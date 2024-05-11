@@ -1,0 +1,10 @@
+.detector{
+    height: calc(100% - 120px);
+    /* width: 100%; */
+    background-color: #888888;
+    padding-top: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+}

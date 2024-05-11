@@ -1,0 +1,34 @@
+.settings{
+    height: 20vh;
+    width: 100%;
+    background-color: #676767;
+    display: flex;
+}
+
+.settings .nav{
+    position: absolute;
+    bottom: 20vh;
+    left: 20px
+}
+.settings .nav .set{
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 7px 7px 0 0;
+    background-color: #4c4b4b;
+    color: whitesmoke;
+    font-family: "JetBrains Mono";
+    font-size: 20px;
+    font-weight: 700;
+    transition-duration: .1s;
+}
+.settings .nav .set:hover{
+    cursor: pointer;
+    background-color: #676767;
+}
+.settings .nav .set:not(:last-child){
+    margin-right: 5px;
+}
+.settings .nav .set.active{
+    background-color: #02d402;
+}

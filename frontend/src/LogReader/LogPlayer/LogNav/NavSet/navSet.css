@@ -1,0 +1,228 @@
+.navSet{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    font-family: "JetBrains Mono";
+}
+.navSet .top{
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    align-content: center;
+    border-bottom: 1px solid whitesmoke;
+    border-top: 1px solid whitesmoke;
+}
+.navSet .top .buttons{
+    width: 250px;
+    height: 60px;
+    display: flex;
+    flex-wrap: wrap;
+    border-right: 1px solid whitesmoke;
+}
+.navSet .top .buttons .new{
+    font-family: "JetBrains Mono";
+    background-color: #4c4b4b;
+    border: none;
+    color: whitesmoke;
+    font-size: 20px;
+    width: 100%;
+    height: 50%;
+    transition-duration: .1s;
+    border-bottom: 1px solid whitesmoke;
+}
+.navSet .top .buttons .sel{
+    background-color: #4c4b4b;
+    height: 50%;
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+    font-family: "JetBrains Mono";
+    font-size: 16px;
+    transition-duration: .1s;
+}
+.navSet .top .buttons .sel:hover{
+    cursor: pointer;
+    background-color: grey;
+}
+.navSet .top .buttons .sel:focus{
+    outline: none
+}
+.navSet .top .buttons .new:hover{
+    cursor: pointer;
+    background-color: grey;
+}
+.navSet .top div{
+    width: calc(100% - 250px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+.navSet .top p{
+    margin: 0;
+    color: whitesmoke;
+    font-size: 20px;
+    text-align: center;
+}
+
+.navSet .log_line{
+    width: 80%;
+    margin-top: 20px;
+}
+.navSet .log_line{
+    width: 80%;
+    margin-top: 20px;
+    border-radius: 5px;
+    background-color: transparent;
+    -webkit-appearance: none;
+}
+.navSet .log_line:hover{
+    cursor: pointer;
+}
+.navSet .log_line::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    overflow: hidden;
+    height: 25px;
+    background-color: gray;
+}
+.navSet .log_line::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background-color: whitesmoke;
+    width: 10px;
+    height: 25px;
+    box-shadow: -560px 0 0 550px #02d402;;
+}
+
+.navSet .controls{
+    margin-top: 15px;
+    padding: 0;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.navSet .controls .next_prev{
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navSet .controls .next_prev button{
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    transition-duration: .1s;
+}
+.navSet .controls .next_prev button:hover{
+    cursor: pointer;
+    background-color: #4c4b4b;
+}
+
+.navSet .controls .next_prev .iter:before{
+    position: absolute;
+    display: block;
+    content: "";
+    width: 30px;
+    height: 30px;
+    border: 3px solid whitesmoke;
+    border-left: none;
+    border-bottom: none;
+    rotate: 45deg;
+}
+.navSet .controls .next_prev .iter:after{
+    position: absolute;
+    display: block;
+    content: "";
+    width: 40px;
+    height: 3px;
+    background-color: whitesmoke;
+}
+.navSet .controls .next_prev .prev{
+    rotate: 180deg;
+}
+
+.navSet .controls .next_prev .start.active:after{
+    content: "";
+    position: absolute;
+    width: 15px;
+    height: 40px;
+    border: 5px solid whitesmoke;
+    border-top: none;
+    border-bottom: none;
+}
+.navSet .controls .next_prev .start.unactive:after{
+    content: ''; 
+    position: absolute;
+    margin-left: 25px;
+    border: 20px solid transparent;
+    border-left: 33px solid whitesmoke;
+    display: block;
+    width: 0;
+    height: 0;
+}
+
+.navSet .controls .speed{
+    width: 40%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.navSet .controls .speed .title{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 10px;
+    font-family: "JetBrains Mono";
+    color: whitesmoke;
+    font-size: 20px;
+    background-color: transparent;
+}
+.navSet .controls .speed div{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.navSet .controls .speed div .range{
+    width: 60%;
+    background-color: transparent;
+    -webkit-appearance: none;
+}
+.navSet .controls .speed div .range::-webkit-slider-runnable-track{
+    -webkit-appearance: none;
+    background-color: whitesmoke;
+    height: 5px;
+    border-radius: 2.5px;
+}
+.navSet .controls .speed div .range::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background-color: #02d402;
+    width: 20px;
+    height: 20px;
+    margin-top: -8px;
+    border-radius: 2px;
+}
+.navSet .controls .speed div .number{
+    height: 25px;
+    text-align: center;
+    border: none;
+    font-size: 15px;
+}
+.navSet .controls .speed div .number:focus{
+    outline: none;
+}
+.navSet .controls .speed div .number::-webkit-outer-spin-button,
+.navSet .controls .speed div .number::-webkit-inner-spin-button{
+    opacity: 1;
+}

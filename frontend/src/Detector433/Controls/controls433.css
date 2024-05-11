@@ -1,0 +1,202 @@
+.controls433{
+    padding-bottom: 20px;
+    width: 30%;
+    height: fit-content;
+    background-color: #676767; 
+}
+
+.controls433 .title{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 20px;
+    background-color:  #4c4b4b;
+}
+.controls433 .title .act_sq{
+    padding: 0 5px;
+    height: 40px;
+    width: 68px;    
+    border: 2px solid #ff0000;
+    background-color: #4c4b4b;
+    border-radius: 10px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    transition-duration: .1s;
+}
+.controls433 .title .act_sq.active{
+    justify-content: right;
+    border-color:#02d402;
+}
+.controls433 .title .act_sq:hover{
+    background-color: #676767;
+    cursor: pointer;
+}
+.controls433 .title .act_sq div{
+    width: 30px;
+    height: 30px;
+    background-color: #ff0000;
+    border-radius: 5px;
+}
+.controls433 .title .act_sq div.active{
+    background-color: #02d402;
+}
+.controls433 .title .act_int{
+    padding: 0;
+    border: none;
+    width: 60%;
+    height: 40px;
+    font-size: 20px;
+    text-align: center;
+}
+.controls433 .title .act_int:hover{
+    cursor: pointer;
+}
+.controls433 .title .act_int:focus{
+    outline: none;
+}
+.controls433 .title .act_refresh{
+    padding: 0;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #4c4b4b;
+    border: none;
+    transition-duration: .1s;
+}
+.controls433 .title .act_refresh:hover{
+    background-color: #676767;
+    cursor: pointer;
+}
+.controls433 .title .act_refresh img{
+    width: 40px;
+    height: 40px;
+}
+
+.controls433 .record{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.controls433 .record .rec_title{
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.controls433 .record .rec_title .act_rec{
+    height: 30px;
+    padding: 0 3px;
+    width: 50px;
+    border: 2px solid #ff0000;
+    background-color: #676767;
+    border-radius: 25px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    transition-duration: .1s;
+}
+.controls433 .record .rec_title .act_rec.active{
+    border: 2px solid #02d402;
+    justify-content: right;
+}
+.controls433 .record .rec_title .act_rec:hover{
+    cursor: pointer;
+    background-color: #4c4b4b;
+}
+.controls433 .record .rec_title .act_rec div{
+    width: 22px;
+    height: 22px;
+    border-radius: 11px;
+    background-color: #ff0000   ;
+}
+.controls433 .record .rec_title .act_rec div.active{
+    background-color: #02d402;
+}
+.controls433 .record .rec_title .rec_text{
+    color: whitesmoke;
+    font-size: 30px;
+    font-family: "JetBrains Mono";
+    margin: 0 
+}
+.controls433 .record .rec_title .rec_time{
+    color: whitesmoke;
+    font-size: 30px;
+    font-family: "JetBrains Mono";
+    margin: 0
+}
+.controls433 .record .rec_title .rec_name{
+    height: 30px;
+    border: none;
+    font-size: 15px;
+    text-align: center;
+}
+.controls433 .record .rec_title .rec_name:focus{
+    outline: none;
+}
+
+.controls433 .com_input{
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px
+}
+.controls433 .com_input input{
+    width: 80%;
+    height: 30px;
+    border: none;
+    text-align: center;
+    font-size: 15px;
+}
+.controls433 .com_input input:focus{
+    outline: none
+}
+.controls433 .com_input .add{
+    display: flex;
+    padding: 0;
+    border: none;
+    background-color: #676767;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition-duration: .1s;
+}
+.controls433 .com_input .add:hover{
+    cursor: pointer;
+    background-color: #4c4b4b;
+}
+.controls433 .com_input .add img{
+    width: 30px;
+    height: 30px;
+}
+
+.controls433 .com_list{
+    padding: 0;
+    margin: 0;
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.controls433 .com_list li{
+    list-style-type: none;
+    width: 45%;
+    text-align: center;
+    background-color: #4c4b4b;
+    margin-bottom: 10px;
+    padding: 7px 0;
+    font-size: 20px;
+    color: whitesmoke;
+    font-family: "JetBrains Mono";
+    transition-duration: .1s;
+}
+.controls433 .com_list li:hover{
+    cursor: pointer;
+    background-color: grey;
+}
+.controls433 .com_list li:nth-child(5),
+.controls433 .com_list li:nth-child(6){
+    margin: 0
+} 

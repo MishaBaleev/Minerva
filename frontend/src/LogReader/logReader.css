@@ -1,0 +1,5 @@
+.logReader{
+    padding-top: 80px;
+    height: calc(100vh - 80px);
+    background-color: grey;
+}

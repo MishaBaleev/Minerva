@@ -1,0 +1,72 @@
+.header{
+    position: absolute;
+    z-index: 100;
+    font-family: 'JetBrains Mono';
+    height: 80px;
+    width: 100%;
+    background-color: #676767;
+    display: flex;
+    justify-content: space-between;
+}
+
+.header .logo{
+    display: flex;
+    align-items: center;
+    margin-left: 10px
+}
+.header .logo img{
+    width: 67px;
+    height: 67px
+}
+.header .logo p{
+    margin: 0;
+    color: whitesmoke;
+    font-size: 36px;
+}
+
+.header .navigation{
+    display: flex;
+    width: 40%;
+}
+.header .navigation button{
+    width: 30%;
+    border: none;
+    padding: 0;
+    background-color: #676767;
+    transition-duration: .1s;
+}
+.header .navigation button.active{
+    border-bottom: 5px solid #02d402;
+}
+.header .navigation button:hover{
+    cursor: pointer;
+    background-color: #4c4b4b;
+}
+.header .navigation button:hover .hint{
+    top: 80px
+}
+.header .navigation button .hint{
+    z-index: -1;
+    margin: 0;
+    padding: 10px 5px;
+    background-color: #4c4b4b;
+    position: absolute;
+    top: 0;
+    width: calc(12% - 10px);
+    border-radius: 0 0 10px 10px;
+    font-size: 15px;
+    color: whitesmoke;
+    transition-duration: .1s;
+}
+.header .navigation button img{
+    height: 50px;
+}
+
+.header .time{
+    display: flex;
+    align-items: center;
+    background-color: #4c4b4b;
+    color: whitesmoke;
+    font-size: 36px;
+    padding: 0 15px
+}

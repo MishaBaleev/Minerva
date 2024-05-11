@@ -1,0 +1,27 @@
+.detector433{
+    height: calc(100% - 120px);
+    background-color: #888888;
+    padding-top: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+}
+
+.detector433 .graphs433{
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.detector433 .graphs433 .update{
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+    font-family: "JetBrains Mono";
+    font-size: 25px;
+    margin: 0
+}
+.detector433 .graphs433 .det_graph433{
+    width: 100%;
+}
