@@ -320,7 +320,7 @@ class LogAnalize extends Component{
                                 is_av={true}
                             />
                             <GraphA
-                                title="Изменение максимального значения ненулевых частот"
+                                title="Изменение среднего значения ненулевых частот"
                                 time={this.state.data_915.time_data}
                                 data={this.state.data_915.av_rssi_data}
                                 is_av={true}
