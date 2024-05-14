@@ -25,65 +25,86 @@ class getInts(APIView):
             "ints": portsDevice
         })
 
-class getLogData(APIView):
-    def post(self, request):
-        file = request.data['file'].read()
-        try:
+def getData(file):
+    try:
+        with apsw.Connection(':memory:') as db:
+            db.deserialize('main', file)
+            cursor = db.cursor()
+            cursor.execute('SELECT * FROM Frames;')
+            frames = cursor.fetchall()
+            log_data = []
+            for frame in frames:
+                log_data.append({
+                    "id": frame[0],
+                    "freq_arr": frame[1],
+                    "norm_freq_arr": frame[2],
+                    "time": frame[3],
+                    "zone_state": frame[4],
+                    "crit_level": frame[5],
+                    "note": frame[6]
+                })
+            return {
+                "result": True,
+                "log_data": log_data,
+                "type": 2.4
+            }
+    except:
+        try: 
             with apsw.Connection(':memory:') as db:
                 db.deserialize('main', file)
                 cursor = db.cursor()
                 cursor.execute('SELECT * FROM Frames;')
                 frames = cursor.fetchall()
                 log_data = []
-                for frame in frames:
-                    log_data.append({
-                        "id": frame[0],
-                        "freq_arr": frame[1],
-                        "norm_freq_arr": frame[2],
-                        "time": frame[3],
-                        "zone_state": frame[4],
-                        "crit_level": frame[5],
-                        "note": frame[6]
-                    })
-                return Response({
+                try:
+                    for frame in frames:
+                        log_data.append({
+                            "id": frame[0],
+                            "freq_arr": frame[1],
+                            "time": frame[2],
+                            "note": frame[3],
+                            "zone_state": frame[4]
+                        })
+                except:
+                    for frame in frames:
+                        log_data.append({
+                            "id": frame[0],
+                            "freq_arr": frame[1],
+                            "time": frame[2],
+                            "note": frame[3]
+                        })
+                return {
                     "result": True,
                     "log_data": log_data,
-                    "type": 2.4
-                })
+                    "type": 443
+                }
         except:
-            try: 
-                with apsw.Connection(':memory:') as db:
-                    db.deserialize('main', file)
-                    cursor = db.cursor()
-                    cursor.execute('SELECT * FROM Frames;')
-                    frames = cursor.fetchall()
-                    log_data = []
-                    try:
-                        for frame in frames:
-                            log_data.append({
-                                "id": frame[0],
-                                "freq_arr": frame[1],
-                                "time": frame[2],
-                                "note": frame[3],
-                                "zone_state": frame[4]
-                            })
-                    except:
-                        for frame in frames:
-                            log_data.append({
-                                "id": frame[0],
-                                "freq_arr": frame[1],
-                                "time": frame[2],
-                                "note": frame[3]
-                            })
-                    return Response({
-                        "result": True,
-                        "log_data": log_data,
-                        "type": 443
-                    })
-            except:
-                return Response({
-                    "result": False
-                })
+            return {
+                "result": False
+            }
+
+class getLogData(APIView):
+    def post(self, request):
+        file = request.data['file'].read()
+        return Response(getData(file))
+        
+            
+class getLogDataMult(APIView):
+    def post(self, request):
+        file_1 = request.data['file_1'].read()
+        file_2 = request.data["file_2"].read()
+        res_1 = getData(file_1)
+        res_2 = getData(file_2)
+        if res_1["result"] == False or res_2["result"] == False:
+            return Response({
+                "result": False 
+            })
+        else:
+            return Response({
+                "result": True,
+                "res_1": res_1,
+                "res_2": res_2
+            })
 
 
 def writeDataXLS(data, file_name):

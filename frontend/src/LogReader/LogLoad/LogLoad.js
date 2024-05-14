@@ -10,13 +10,23 @@ class LogLoad extends Component{
         return(
             <div className="logLoad">
                 <label className="input-file">
-                    <input 
-                        type="file" 
-                        className="input" 
-                        accept=".db" 
-                        onChange={this.props.fileSelect}
-                    />
-                    <span>Выберите файл</span>
+                    {this.props.type=="single"?
+                        <input 
+                            type="file" 
+                            className="input" 
+                            accept=".db" 
+                            onChange={this.props.fileSelect}
+                        />:
+                        <input 
+                            type="file" 
+                            name="filefield"
+                            multiple="multiple"
+                            className="input" 
+                            accept=".db" 
+                            onChange={this.props.fileSelect}
+                        />
+                    }
+                    <span>{this.props.title}</span>
                 </label>
             </div>
         )

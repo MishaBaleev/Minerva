@@ -36,7 +36,8 @@ class LogNav extends Component{
                 setRecord: this.props.setRecord,
                 setRecordSpeed: this.props.setRecordSpeed,
                 refresh: this.props.refresh,
-                changeGraph: this.props.changeGraph
+                changeGraph: this.props.changeGraph,
+                log_type: this.props.log_type
             }:
             {
                 changeColor: this.props.changeColor,

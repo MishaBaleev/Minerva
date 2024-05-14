@@ -54,6 +54,7 @@ urlpatterns = [
     path("checkBack", checkBack.as_view()),
     path("getInts", getInts.as_view()),
     path("getLogData", getLogData.as_view()),
+    path("getLogDataMult", getLogDataMult.as_view()),
     path("analizeLog", analizeLog.as_view()),
     path("analizeLog915", analizeLog915.as_view())
 ]

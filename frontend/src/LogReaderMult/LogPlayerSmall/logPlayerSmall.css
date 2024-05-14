@@ -1,0 +1,12 @@
+.lp_small{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-content: space-between;
+    justify-content: center;
+}
+.lp_small:first-child{
+    border-right: 1px solid whitesmoke;
+}

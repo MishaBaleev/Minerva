@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import "./logReader.css";
 import LogPlayer from "./LogPlayer/LogPlayer";
 import LogLoad from "./LogLoad/LogLoad";
-import axios from "axios"
+import axios from "axios";
 
 class LogReader extends Component{
     constructor(props){
@@ -20,6 +20,7 @@ class LogReader extends Component{
 
     fileSelect(e){
         let data = new FormData
+        console.log(e.target.files[0])
         data.append("file", new Blob([e.target.files[0]]))
         axios.post("http://127.0.0.1:8000/getLogData", data).then(response => {
             console.log(response)
@@ -28,12 +29,14 @@ class LogReader extends Component{
             }else{
                 if (response.data.type == 2.4){
                     this.setState(state => ({
+                        is_mult: false,
                         log_data: response.data.log_data,
                         file_name: e.target.files[0].name,
                         log_type: 2.4
                     }))
                 }else if (response.data.type == 443){
                     this.setState(state => ({
+                        is_mult: false,
                         log_data: response.data.log_data,
                         file_name: e.target.files[0].name,
                         log_type: 443
@@ -47,7 +50,9 @@ class LogReader extends Component{
         this.setState(state => ({
             log_data: null,
             file_name: "",
-            log_type: null
+            log_type: null,
+            is_mult: false,
+            log_data_mult: null
         }))
     }
 
@@ -55,9 +60,13 @@ class LogReader extends Component{
         return(
             <div className="logReader">
                 {this.state.log_data==null?
-                    <LogLoad
-                        fileSelect={this.fileSelect}
-                    />:
+                    <div className="load">
+                        <LogLoad
+                            fileSelect={this.fileSelect}
+                            title={"Выберите файл"}
+                            type="single"
+                        />
+                    </div>:
                     <LogPlayer
                         log_data={this.state.log_data}
                         file_name={this.state.file_name}

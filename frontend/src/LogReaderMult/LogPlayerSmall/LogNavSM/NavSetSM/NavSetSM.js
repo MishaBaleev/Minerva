@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import "./navSet.css";
+import "./navSetSM.css";
 
-class NavSet extends Component{
+class NavSetSM extends Component{
     constructor(props){
         super(props)
 
@@ -50,21 +50,17 @@ class NavSet extends Component{
 
     render(){
         return(
-            <div className="navSet">
+            <div className="navSetSM">
                 <div className="top">
-                    <div className="buttons">
-                        <button className={"new " + (this.props.log_type==2.4?"":"single")} onClick={this.props.refresh}>Выбрать новый файл</button>
-                        {this.props.log_type==2.4?
-                            <select className="sel" onChange={(e) => {this.props.changeGraph(e.target.value)}}>
-                                <option value={0}>Стандартный график</option>
-                                <option value={1}>Нормализованный график</option>
-                            </select>:""
-                        }
-                    </div>
-                    <div>
-                        <p className="frame">Пакет № {this.props.cur_frame.id}/{this.props.stat_data.length}</p>
-                        <p className="cur_time">Текущее время - {this.secToDate(this.props.cur_frame.time)}</p>
-                        <p className="del_time">Время с начала записи - {this.calcTimeDif(this.props.cur_frame.time)} с.</p>
+                    {this.props.is_first==true?
+                        <div className="buttons">
+                            <button className="new single" onClick={this.props.refresh}>Выбрать новый файл</button>
+                        </div>:""
+                    }
+                    <div className={this.props.is_first==false?"center":""}>
+                        <p className="frame">Пакет № <br/>{this.props.cur_frame.id}/{this.props.stat_data.length}</p>
+                        <p className="cur_time">Текущее время <br/>{this.secToDate(this.props.cur_frame.time)}</p>
+                        <p className="del_time">Время с начала записи <br/>{this.calcTimeDif(this.props.cur_frame.time)} с.</p>
                     </div>
                 </div>
                 <input className="log_line"
@@ -107,4 +103,4 @@ class NavSet extends Component{
         )
     }
 }
-export default NavSet
+export default NavSetSM

@@ -4,6 +4,7 @@ import logo from "./img/logo.png";
 import detector from "./img/detector.png";
 import log_reader from "./img/log_reader.png"
 import detector433 from "./img/detector433.png";
+import log_reader_mult from "./img/log_reader_mult.png";
 import { SerialReader } from "../SerialReader";
 
 class Header extends Component{
@@ -69,6 +70,12 @@ class Header extends Component{
                         <img src={log_reader} alt="log_reader"/>
                         <p className="hint">
                             Просмотр записей
+                        </p>
+                    </button>
+                    <button className={this.props.active_cmp==3?"active":""} onClick={() => {this.props.changeCMP(3)}}>
+                        <img src={log_reader_mult} alt="log_reader"/>
+                        <p className="hint">
+                            Просмотр двух записей
                         </p>
                     </button>
                     {/* <button onClick={this.readSerial}>reader</button>
