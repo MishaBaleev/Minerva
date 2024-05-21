@@ -1,0 +1,22 @@
+.logGraphSM{
+    width: 95%;
+    height: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.logGraphSM div{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.logGraphSM div .graph443SM{
+    width: 100%;
+} 
+.logGraphSM div .graph443SM:nth-child(1) {
+    margin-right: 0;
+}

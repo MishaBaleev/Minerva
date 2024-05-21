@@ -72,12 +72,12 @@ class Header extends Component{
                             Просмотр записей
                         </p>
                     </button>
-                    <button className={this.props.active_cmp==3?"active":""} onClick={() => {this.props.changeCMP(3)}}>
+                    {/* <button className={this.props.active_cmp==3?"active":""} onClick={() => {this.props.changeCMP(3)}}>
                         <img src={log_reader_mult} alt="log_reader"/>
                         <p className="hint">
                             Просмотр двух записей
                         </p>
-                    </button>
+                    </button> */}
                     {/* <button onClick={this.readSerial}>reader</button>
                     <button onClick={this.read}>read</button> */}
                 </div>

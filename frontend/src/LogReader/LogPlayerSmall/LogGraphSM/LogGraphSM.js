@@ -93,14 +93,17 @@ class LogGraphSM extends Component{
                 }
             }
         }
+        console.log(this.props.log_type)
         return(
-            <div className="logGraph">
+            <div className="logGraphSM">
                 {this.props.log_type==2.4?
-                    <Bar 
-                        type="Bar"
-                        options={options}
-                        data={data}
-                    />:
+                    <div>
+                        <Bar 
+                            type="Bar"
+                            options={options}
+                            data={data}
+                        />
+                    </div>:
                     <div>
                         <Graph443SM
                             title="800-850"

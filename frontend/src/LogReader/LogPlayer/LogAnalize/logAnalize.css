@@ -99,10 +99,7 @@
 }
 .logAnalize .main_wind .range .item.time{
     width: 40%;
-    margin-bottom: 30px;
-}
-.logAnalize .main_wind .range .item.time.not_margin, .logAnalize .main_wind .range .block.time.not_margin{
-    margin-bottom: 0;
+    margin-bottom: 5px;
 }
 .logAnalize .main_wind .range .item .title{
     width: 100%;
@@ -159,7 +156,7 @@
     border-radius: 2.5px;
 }
 .logAnalize .main_wind .range .block.time{
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 
 .logAnalize .main_wind .start_an{
@@ -181,9 +178,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    height: 59%;
+    height: 62%;
     overflow-y: scroll;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 .logAnalize .main_wind .graphs::-webkit-scrollbar{
     background-color: transparent;

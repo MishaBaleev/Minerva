@@ -26,6 +26,7 @@
 
 .header .navigation{
     display: flex;
+    justify-content: space-around;
     width: 60%;
 }
 .header .navigation button{
@@ -52,7 +53,7 @@
     background-color: #4c4b4b;
     position: absolute;
     top: 0;
-    width: calc(15% - 10px);
+    width: calc(18% - 10px);
     border-radius: 0 0 10px 10px;
     font-size: 15px;
     color: whitesmoke;

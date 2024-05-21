@@ -1,24 +1,19 @@
 import React, {Component} from "react";
 import {Bar} from "react-chartjs-2";
-import '../LogGraphSM/logGraphSM.css'
 
-class LogGraphNormSM extends Component{
+class Graph443SM extends Component{
     constructor(props){
         super(props)
-
-        this.xTicks = new Array(82).fill(0).map((item, index) => {
-            return index+2401
-        })
     }
 
     render(){
         let data = {
-            labels: this.xTicks,
+            labels: this.props.xticks,
             color: "whitesmoke",
             datasets: [{
-                data: JSON.parse(this.props.cur_frame.norm_freq_arr),
+                data: this.props.data,
                 label: "",
-                backgroundColor: this.props.colors.graph,
+                backgroundColor: this.props.color,
                 fill: true
             }]
         }
@@ -27,18 +22,14 @@ class LogGraphNormSM extends Component{
                 legend: {
                     display: false
                 },
-                annotation: {
-                    annotations: [
-                        
-                    ],
-                }
             },
             scales:{
                 y:{
                     grid:{
                         color: "whiteSmoke"
                     },
-                    suggestedMin:0, suggestedMax:1,
+                    suggestedMin:0, 
+                    suggestedMax:95,
                     ticks:{
                         color: "whitesmoke"
                     }
@@ -54,7 +45,7 @@ class LogGraphNormSM extends Component{
             }
         }
         return(
-            <div className="logGraph">
+            <div className="graph443SM">
                 <Bar 
                     type="Bar"
                     options={options}
@@ -65,5 +56,4 @@ class LogGraphNormSM extends Component{
     }
 }
 
-export default LogGraphNormSM
-
+export default Graph443SM

@@ -45,14 +45,11 @@ class Graph443 extends Component{
             }
         }
         return(
-            <div className="graph443">
-                <p className="title">{this.props.title}</p> 
-                <Bar 
-                    type="Bar"
-                    options={options}
-                    data={data}
-                />
-            </div>
+            <Bar 
+                type="Bar"
+                options={options}
+                data={data}
+            />
         )
     }
 }

@@ -1,7 +1,6 @@
 import React, {Component} from "react";
 import "./logPlayerSmall.css";
 import LogGraphSM from "./LogGraphSM/LogGraphSM";
-import LogGraphNormSM from "./LogGraphNormSM/LogGraphNormSM";
 import LogNavSM from "./LogNavSM/LogNavSM";
 
 class LogPlayerSmall extends Component{
@@ -109,19 +108,15 @@ class LogPlayerSmall extends Component{
 
     render(){
         return <div className="lp_small">
-            {this.state.graph_view==0?
+            <div className="graphSM">
                 <LogGraphSM
                     cur_frame={this.state.cur_frame}
                     freq_arr={JSON.parse(this.state.cur_frame.freq_arr)}
                     colors={this.state.colors}
                     graph_zone={this.state.graph_zone}
                     log_type={this.props.log_type}
-                />:
-                <LogGraphNormSM
-                    cur_frame={this.state.cur_frame}
-                    colors={this.state.colors}
                 />
-            }
+            </div>
             <LogNavSM
                 setCurFrame={this.setCurFrame}
                 nextFrame={this.nextFrame}
@@ -137,6 +132,7 @@ class LogPlayerSmall extends Component{
                 showAnalize={this.showAnalize}
                 log_type={this.props.log_type}
                 is_first={this.props.is_first}
+                file_name={this.props.file_name}
             />
         </div>
     }

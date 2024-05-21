@@ -96,11 +96,13 @@ class LogGraph extends Component{
         return(
             <div className="logGraph">
                 {this.props.log_type==2.4?
-                    <Bar 
-                        type="Bar"
-                        options={options}
-                        data={data}
-                    />:
+                    <div>
+                        <Bar 
+                            type="Bar"
+                            options={options}
+                            data={data}
+                        />
+                    </div>:
                     <div>
                         <Graph443
                             title="800-850"

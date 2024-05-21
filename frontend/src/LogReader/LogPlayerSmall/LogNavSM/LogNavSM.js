@@ -9,7 +9,10 @@ class LogNavSM extends Component{
 
     render(){
         return(
-            <div className="logNav">
+            <div className="logNavSM">
+                <div className="file_name">
+                    <h3>{this.props.file_name}</h3>
+                </div>
                 <NavSetSM
                     cur_frame={this.props.cur_frame}
                     setCurFrame={this.props.setCurFrame}

@@ -196,9 +196,9 @@ def writeGraph(x_data, y_data, style, start, ws, x_labels, y_labels, title, star
 def writeDataXLS915(data, file_name):
     wb = Workbook()
     ws = wb.active
-    rows = [["time", "active", "", "max", "", "av_rssi"]]
+    rows = [["time", "active", "", "max", "", "av_rssi", "", f"under_{data["rssi_level"]}"]]
     for i in range(len(data["time_data"])):
-        rows.append([data["time_data"][i], data["activity_data"][i], "", data["max_data"][i], "", data["av_rssi_data"][i]])
+        rows.append([data["time_data"][i], data["activity_data"][i], "", data["max_data"][i], "", data["av_rssi_data"][i], "", data["under_rssi_data"][i]])
     for row in rows:
         ws.append(row) 
 
@@ -209,6 +209,7 @@ def writeDataXLS915(data, file_name):
         ws[f"{alphabet[i-1]}1"].fill = yelow_fill
     ws["D1"].fill = yelow_fill
     ws["F1"].fill = yelow_fill
+    ws["H1"].fill = yelow_fill
     
     #Вертикальная покраска
     green_color = openpyxl.styles.colors.Color(rgb='42FF16')
@@ -216,9 +217,11 @@ def writeDataXLS915(data, file_name):
     for i in range(2, len(data["time_data"])+2):
         ws[f"A{i}"].fill = green_fill
 
-    writeGraph(data["time_data"], data["activity_data"], 13, "H2", ws, "Time", "Activity", "Graph of changes in the workload of the activity", 2)
-    writeGraph(data["time_data"], data["max_data"], 15, "H29", ws, "Time", "Max_value", "Graph of changes in the workload of the max value", 4)
-    writeGraph(data["time_data"], data["av_rssi_data"], 18, "U2", ws, "Time", "av_rssi", "Graph of changes in the workload of the rssi", 6)
+    writeGraph(data["time_data"], data["activity_data"], 13, "j2", ws, "Time", "Activity", "Graph of changes in the workload of the activity", 2)
+    writeGraph(data["time_data"], data["max_data"], 15, "j29", ws, "Time", "Max_value", "Graph of changes in the workload of the max value", 4)
+    writeGraph(data["time_data"], data["av_rssi_data"], 18, "W2", ws, "Time", "av_rssi", "Graph of changes in the workload of the rssi", 6)
+    writeGraph(data["time_data"], data["under_rssi_data"], 13, "W29", ws, "Time", f"under_{data["rssi_level"]}", "Graph of changes in the workload under rssi", 8)
+
 
     wb.save(f"{os.getcwd().replace('fullstack_django', 'reports')}/{file_name[:len(file_name)-3]}.xlsx")
 

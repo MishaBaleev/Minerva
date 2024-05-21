@@ -13,7 +13,6 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 import Loading from "./Loading/Loading";
 import Modal from "./Modal/Modal";
 import Detector433 from "./Detector433/Detector433";
-import LogReaderSmall from "./LogReaderMult/LogReaderSM";
 
 class App extends Component{
   constructor(props){
@@ -21,8 +20,7 @@ class App extends Component{
     this.cmps = [
       <Detector433/>,
       <Detector/>,
-      <LogReader/>,
-      <LogReaderSmall/>
+      <LogReader/>
     ]
 
     this.state = {
