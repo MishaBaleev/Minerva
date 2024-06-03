@@ -1,9 +1,11 @@
 import React, {Component} from "react";
-import "./logReader.css";
-import LogPlayer from "./LogPlayer/LogPlayer";
+import "./logReader.scss";
+import LogPlayer2400 from "./LogPlayer2400/LogPlayer2400";
+import LogPlayer915 from "./LogPlayer915/LogPlayer915";
 import LogLoad from "./LogLoad/LogLoad";
 import axios from "axios";
 import LogPlayerSmall from "./LogPlayerSmall/LogPlayerSmall";
+import LogPlayerMulti from "./LogPlayerMulti/LogPlayerMulti";
 
 class LogReader extends Component{
     constructor(props){
@@ -11,7 +13,7 @@ class LogReader extends Component{
 
         this.state = {
             log_data: null,
-            log_data915: null,
+            log_dataSmall: null,
             file_name: "",
             log_type: null
         }
@@ -31,18 +33,22 @@ class LogReader extends Component{
             }else{
                 if (response.data.type == 2.4){
                     this.setState(state => ({
-                        is_mult: false,
                         log_data: response.data.log_data,
                         file_name: e.target.files[0].name,
                         log_type: 2.4
                     }))
                 }else if (response.data.type == 443){
                     this.setState(state => ({
-                        is_mult: false,
                         log_data: response.data.log_data,
                         file_name: e.target.files[0].name,
                         log_type: 443
                     }))
+                }else if (response.data.type == "multi"){
+                    this.setState({
+                        log_data: response.data.log_data,
+                        file_name: e.target.files[0].name, 
+                        log_type: "multi"
+                    })
                 }
             }
         })
@@ -61,7 +67,7 @@ class LogReader extends Component{
                 }else{
                     console.log(response.data) 
                     this.setState({
-                        log_data915: {
+                        log_dataSmall: {
                             data_1: response.data.res_1.log_data,
                             data_2: response.data.res_2.log_data,
                             file_name_1: e.target.files[0].name,
@@ -78,18 +84,17 @@ class LogReader extends Component{
     refresh(){
         this.setState(state => ({
             log_data: null,
-            log_data915: null,
+            log_dataSmall: null,
+            log_dataMulti: null,
             file_name: "",
-            log_type: null,
-            is_mult: false,
-            log_data_mult: null
+            log_type: null
         }))
     }
 
     render(){
         return(
             <div className="logReader">
-                {(this.state.log_data==null && this.state.log_data915==null)?
+                {(this.state.log_data==null && this.state.log_dataSmall==null)?
                     <div className="load">
                         <LogLoad
                             fileSelect={this.fileSelect}
@@ -104,31 +109,46 @@ class LogReader extends Component{
                     </div>
                     :""
                 }           
-                {this.state.log_data!=null?
-                    <LogPlayer
+                {(this.state.log_data!=null && this.state.log_type==2.4)?
+                    <LogPlayer2400
                         log_data={this.state.log_data}
                         file_name={this.state.file_name}
                         refresh={this.refresh}
                         updateModal={this.props.updateModal}
-                        log_type={this.state.log_type}
                     />:""    
                 }
-                {this.state.log_data915!=null?
+                {(this.state.log_data!=null && this.state.log_type==443)?
+                    <LogPlayer915
+                        log_data={this.state.log_data}
+                        file_name={this.state.file_name}
+                        refresh={this.refresh}
+                        updateModal={this.props.updateModal}
+                    />:""    
+                }
+                {(this.state.log_data!= null && this.state.log_type=="multi")?
+                    <LogPlayerMulti
+                        log_data={this.state.log_data}
+                        file_name={this.state.file_name}
+                        refresh={this.refresh}
+                        updateModal={this.props.updateModal}
+                    />:""
+                }
+                {this.state.log_dataSmall!=null?
                     <div className="mult_player">
                         <LogPlayerSmall
-                            log_data={this.state.log_data915.data_1}
-                            file_name={this.state.log_data915.file_name_1}
+                            log_data={this.state.log_dataSmall.data_1}
+                            file_name={this.state.log_dataSmall.file_name_1}
                             refresh={this.refresh}
                             updateModal={this.props.updateModal}
-                            log_type={this.state.log_data915.log_type_1}
+                            log_type={this.state.log_dataSmall.log_type_1}
                             is_first={true}
                         />
                         <LogPlayerSmall
-                            log_data={this.state.log_data915.data_2}
-                            file_name={this.state.log_data915.file_name_2}
+                            log_data={this.state.log_dataSmall.data_2}
+                            file_name={this.state.log_dataSmall.file_name_2}
                             refresh={this.refresh}
                             updateModal={this.props.updateModal}
-                            log_type={this.state.log_data915.log_type_2}
+                            log_type={this.state.log_dataSmall.log_type_2}
                             is_first={false}
                         />
                     </div>:""

@@ -1,0 +1,14 @@
+.logPlayer{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.logPlayer .block-1{
+    width: 70%;
+    height: calc(100% - 40px);
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-between;
+}

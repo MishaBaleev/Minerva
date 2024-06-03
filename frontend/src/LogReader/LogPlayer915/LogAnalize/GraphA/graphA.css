@@ -1,0 +1,12 @@
+.graphA{
+    width: 80%;
+}
+.graphA .title{
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 20px;
+    font-family: "JetBrains Mono";
+    margin: 0;
+    margin-top: 20px;
+}

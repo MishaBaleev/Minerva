@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./detectorSet.css";
+import "./detectorSet.scss";
 import show from "./img/show.png";
 
 class DetectorSet extends Component{
@@ -52,6 +52,9 @@ class DetectorSet extends Component{
                     <p className="title">Обнаружение аномалий</p>
                     <p className={"result col_"+this.props.zone_state}>
                         {this.props.zone_state==0?"Не определено":(this.props.zone_state==1?"Аномалия":"Аномалии не обнаружены")}
+                    </p>
+                    <p className="anom">
+                        {this.props.anom_type==0?"Не определено":("Аномалия "+this.props.anom_type)}
                     </p>
                 </div>
                 <div className="block"></div>

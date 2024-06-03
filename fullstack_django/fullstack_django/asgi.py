@@ -17,8 +17,9 @@ from django.urls import path
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fullstack_django.settings')
 # from consumer import MainConsumer
-from consumer_2400 import Consumer_2400
-from consumer_433 import Consumer_433
+from Consumers.consumer_2400 import Consumer_2400
+from Consumers.consumer_433 import Consumer_433
+from Consumers.consumerMulti import Consumer_Multi
 django_asgi_app = get_asgi_application()
 application = ProtocolTypeRouter({
     'http': django_asgi_app,
@@ -26,7 +27,8 @@ application = ProtocolTypeRouter({
         URLRouter([
             # path('ws', MainConsumer.as_asgi())
             path("con_2400", Consumer_2400.as_asgi()),
-            path("con_433", Consumer_433.as_asgi())
+            path("con_433", Consumer_433.as_asgi()),
+            path("con_multi", Consumer_Multi.as_asgi())
         ])
     )
 })

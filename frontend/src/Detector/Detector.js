@@ -27,7 +27,8 @@ class Detector extends Component{
             },
             zone_state: {
                 type: 0,
-                targets: []
+                targets: [],
+                anom_type: 0
             },
             temp_block: [],
             temp_results: [],
@@ -242,6 +243,7 @@ class Detector extends Component{
                     updateModal={this.props.updateModal}
                     zone_state={this.state.zone_state.type}
                     temp_results={this.state.temp_results}
+                    anom_type={this.state.zone_state.anom_type}
                     temp_time={this.state.temp_time}
                     showTempResult={this.showTempResult}
                     alg_test_res={this.state.alg_test_res}

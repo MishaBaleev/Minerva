@@ -26,7 +26,7 @@ class getInts(APIView):
         })
 
 def getData(file):
-    try:
+    try: #log 2400
         with apsw.Connection(':memory:') as db:
             db.deserialize('main', file)
             cursor = db.cursor()
@@ -49,7 +49,7 @@ def getData(file):
                 "type": 2.4
             }
     except:
-        try: 
+        try: #log 915
             with apsw.Connection(':memory:') as db:
                 db.deserialize('main', file)
                 cursor = db.cursor()
@@ -78,10 +78,30 @@ def getData(file):
                     "log_data": log_data,
                     "type": 443
                 }
-        except:
-            return {
-                "result": False
-            }
+        except: 
+            try: #log Multi
+                with apsw.Connection(':memory:') as db:
+                    db.deserialize('main', file)
+                    cursor = db.cursor()
+                    cursor.execute('SELECT * FROM FramesMulti;')
+                    frames = cursor.fetchall()
+                    log_data = []
+                    for frame in frames:
+                        log_data.append({
+                            "id": frame[0],
+                            "freq_arr": frame[1],
+                            "time": frame[2],
+                            "note": frame[3]
+                        })
+                    return {
+                        "result": True,
+                        "log_data": log_data,
+                        "type": "multi"
+                    }
+            except:
+                return {
+                    "result": False
+                }
 
 class getLogData(APIView):
     def post(self, request):
@@ -100,11 +120,16 @@ class getLogDataMult(APIView):
                 "result": False 
             })
         else:
-            return Response({
-                "result": True,
-                "res_1": res_1,
-                "res_2": res_2
-            })
+            if res_1["type"] == "multi" or res_2["type"] == "multi":
+                return Response({
+                    "result": False
+                })
+            else:
+                return Response({
+                    "result": True,
+                    "res_1": res_1,
+                    "res_2": res_2
+                })
 
 
 def writeDataXLS(data, file_name):

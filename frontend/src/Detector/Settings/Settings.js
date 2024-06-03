@@ -56,6 +56,7 @@ class Settings extends Component{
                     act_an:this.state.act_an,
                     changeCritLev:this.props.changeCritLev,
                     zone_state: this.props.zone_state,
+                    anom_type: this.props.anom_type,
                     temp_results: this.props.temp_results,
                     temp_time: this.props.temp_time,
                     showTempResult: this.props.showTempResult,

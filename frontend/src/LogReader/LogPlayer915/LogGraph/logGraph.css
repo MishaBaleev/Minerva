@@ -1,0 +1,11 @@
+.logGraph{
+    width: 100%;
+    height: calc(75% - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.logGraph div{
+    width: 85%;
+}

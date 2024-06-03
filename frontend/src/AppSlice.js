@@ -16,7 +16,12 @@ export const appSlice = createSlice({
         },
         is_con433: false,
         is_rec433: false,
-        is_test433: false
+        is_test433: false,
+        start_configMult:{
+            int: ""
+        },
+        is_conMult: false,
+        is_recMult: false
     },
     reducers: {
         setStartCon: (state, action) => {
@@ -37,10 +42,19 @@ export const appSlice = createSlice({
         setRec433: (state, action) => {
             state.is_rec433 = action.payload
         },
+        setStartConMult: (state, action) => {
+            state.start_configMult[action.payload.key] = action.payload.value
+        },
+        setConMult: (state, action) => {
+            state.is_conMult = action.payload
+        },
+        setRecMult: (state, action) => {
+            state.is_recMult = action.payload
+        },
         setTest: (state, action) => {
             state.is_test = action.payload
         }
     }
 })
-export const {setStartCon, setCon, setRec, setStartCon433, setCon433, setRec433, setTest} = appSlice.actions 
+export const {setStartCon, setCon, setRec, setStartCon433, setCon433, setRec433, setTest, setStartConMult, setConMult, setRecMult} = appSlice.actions 
 export default appSlice.reducer
