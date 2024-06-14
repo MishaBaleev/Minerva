@@ -10,6 +10,8 @@ class DetectorSet extends Component{
             act_an: ""
         }
 
+        this.anom_types = ["Не определено", "Mavic - пульт", "Mavic - wi-fi", "wi-fi"]
+
         this.changeCritLev = this.changeCritLev.bind(this)
     }
 
@@ -18,6 +20,7 @@ class DetectorSet extends Component{
     }
 
     render(){
+        console.log(this.props)
         return(
             <div className="detect_set">
                 <div className="analize">
@@ -54,7 +57,10 @@ class DetectorSet extends Component{
                         {this.props.zone_state==0?"Не определено":(this.props.zone_state==1?"Аномалия":"Аномалии не обнаружены")}
                     </p>
                     <p className="anom">
-                        {this.props.anom_type==0?"Не определено":("Аномалия "+this.props.anom_type)}
+                        Метрика № 1<br/>{this.anom_types[this.props.anom_type.classifyResult_5from2]}
+                    </p>
+                    <p className="anom">
+                        Метрика № 2<br/>{this.anom_types[this.props.anom_type.classifyResult_10from2]}
                     </p>
                 </div>
                 <div className="block"></div>

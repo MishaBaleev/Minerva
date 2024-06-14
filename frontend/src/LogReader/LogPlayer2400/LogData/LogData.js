@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./logData.css";
+import "./logData.scss";
 import Graph from "./Graph/Graph";
 import show from "../../../Detector/Settings/DetectorSet/img/show.png";
 
@@ -12,6 +12,7 @@ class LogData extends Component{
             "Аномалия",
             "Аномалии не обнаружены"
         ]
+        this.anom_types = ["Не определено", "Mavic - пульт", "Mavic - wi-fi", "wi-fi"]
 
         this.centers = [2412, 2417, 2422, 2427, 2432, 2437, 2442, 2447, 2452, 2457, 2462, 2467, 2472]
         this.range443 = [[800, 850], [851, 901], [901, 920]]
@@ -50,6 +51,7 @@ class LogData extends Component{
     }
 
     render(){
+        console.log(JSON.parse(this.props.cur_frame.zone_state).anom_type)
         return(
             <div className="logData">
                 <p className="file_name">Файл - {this.cutFileName(this.props.file_name)}</p>
@@ -70,7 +72,27 @@ class LogData extends Component{
                                 {this.zone_states[0]}
                             </p>
                         }
-                        
+                    </div>
+                    <div className="block">
+                        <p className="title">Автоматический анализ</p>
+                        {this.props.cur_frame.zone_state?
+                            JSON.parse(this.props.cur_frame.zone_state).anom_type?
+                                <p className="ano_type">
+                                    Метрика № 1 - {this.anom_types[JSON.parse(this.props.cur_frame.zone_state).anom_type.classifyResult_5from2]}
+                                </p>:
+                                <p className="ano_type">Метрика № 1 - {this.anom_types[0]}</p>
+                            :
+                            <p className="ano_type">Метрика № 1 - {this.anom_types[0]}</p>
+                        }
+                        {this.props.cur_frame.zone_state?
+                            JSON.parse(this.props.cur_frame.zone_state).anom_type?
+                                <p className="ano_type">
+                                    Метрика № 2 - {this.anom_types[JSON.parse(this.props.cur_frame.zone_state).anom_type.classifyResult_10from2]}
+                                </p>:
+                                <p className="ano_type">Метрика № 2 - {this.anom_types[0]}</p>
+                            :
+                            <p className="ano_type">Метрика № 2 - {this.anom_types[0]}</p>
+                        }
                     </div>
                     <div className="block">
                         <p className="title">Заметки</p>
