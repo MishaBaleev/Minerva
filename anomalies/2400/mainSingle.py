@@ -45,7 +45,7 @@ def writeXLS(data:list) -> None:
                 resultArray[index+1][startIndex+levelIndex] = value[levelIndex]
 
     df = pd.DataFrame(resultArray)
-    df.to_excel(excel_writer = "uav_wi-fi.xlsx")
+    df.to_excel(excel_writer = "test.xlsx")
 
 def getLevels(dirName:str) -> None:
     resultData = []
@@ -55,7 +55,7 @@ def getLevels(dirName:str) -> None:
             fileData = []
             for block in logData:
                 levelArr = []
-                for critLevel in [2, 5, 10]:
+                for critLevel in [5, 10, 15]:
                     levelData = getWidth(block, critLevel)
                     levelArr.append(levelData)
                 fileData.append(levelArr)

@@ -14,11 +14,13 @@ import Loading from "./Loading/Loading";
 import Modal from "./Modal/Modal";
 import Detector433 from "./Detector433/Detector433";
 import DetectorMulti from "./DetectorMulti/DetectorMulti";
+import Detector5800 from "./Detector5800/Detector5800";
 
 class App extends Component{
   constructor(props){
     super(props)
     this.cmps = [
+      <Detector5800/>,
       <DetectorMulti/>,
       <Detector433/>,
       <Detector/>,

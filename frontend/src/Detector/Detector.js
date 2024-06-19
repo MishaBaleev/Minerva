@@ -28,10 +28,7 @@ class Detector extends Component{
             zone_state: {
                 type: 0,
                 targets: [],
-                anom_type: {
-                    classifyResult_5from2: 0,
-                    classifyResult_10from2: 0
-                }
+                anom_type: 0
             },
             temp_block: [],
             temp_results: [],

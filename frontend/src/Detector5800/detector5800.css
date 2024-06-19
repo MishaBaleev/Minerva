@@ -1,0 +1,27 @@
+.detector5800{
+    height: calc(100% - 120px);
+    background-color: #888888;
+    padding-top: 120px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-between;
+}
+
+.detector5800 .graphs5800{
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.detector5800 .graphs5800 .update{
+    width: 100%;
+    text-align: center;
+    color: whitesmoke;
+    font-family: "JetBrains Mono";
+    font-size: 25px;
+    margin: 0
+}
+.detector5800 .graphs5800 .det_graph5800{
+    width: 100%;
+}

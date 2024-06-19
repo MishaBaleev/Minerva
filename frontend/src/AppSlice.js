@@ -10,18 +10,27 @@ export const appSlice = createSlice({
         },
         is_con: false,
         is_rec: false,
+        is_test: false,
+
         start_config433:{
             int: "",
             is_detect_act: false
         },
         is_con433: false,
         is_rec433: false,
-        is_test433: false,
+
         start_configMult:{
             int: ""
         },
         is_conMult: false,
-        is_recMult: false
+        is_recMult: false,
+
+        start_config5800:{
+            int: "",
+            is_detect_act: false
+        },
+        is_con5800: false,
+        is_rec5800: false,
     },
     reducers: {
         setStartCon: (state, action) => {
@@ -33,6 +42,10 @@ export const appSlice = createSlice({
         setRec: (state, action) => {
             state.is_rec = action.payload
         },
+        setTest: (state, action) => {
+            state.is_test = action.payload
+        },
+
         setStartCon433: (state, action) => {
             state.start_config433[action.payload.key] = action.payload.value
         },
@@ -42,6 +55,7 @@ export const appSlice = createSlice({
         setRec433: (state, action) => {
             state.is_rec433 = action.payload
         },
+
         setStartConMult: (state, action) => {
             state.start_configMult[action.payload.key] = action.payload.value
         },
@@ -51,10 +65,17 @@ export const appSlice = createSlice({
         setRecMult: (state, action) => {
             state.is_recMult = action.payload
         },
-        setTest: (state, action) => {
-            state.is_test = action.payload
-        }
+
+        setStartCon5800: (state, action) => {
+            state.start_config5800[action.payload.key] = action.payload.value
+        },
+        setCon5800: (state, action) => {
+            state.is_con5800 = action.payload
+        },
+        setRec5800: (state, action) => {
+            state.is_rec5800 = action.payload
+        },
     }
 })
-export const {setStartCon, setCon, setRec, setStartCon433, setCon433, setRec433, setTest, setStartConMult, setConMult, setRecMult} = appSlice.actions 
+export const {setStartCon, setCon, setRec, setStartCon433, setCon433, setRec433, setTest, setStartConMult, setConMult, setRecMult, setStartCon5800, setCon5800, setRec5800} = appSlice.actions 
 export default appSlice.reducer

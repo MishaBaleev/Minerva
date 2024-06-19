@@ -99,9 +99,29 @@ def getData(file):
                         "type": "multi"
                     }
             except:
-                return {
-                    "result": False
-                }
+                try: # 5800
+                    with apsw.Connection(':memory:') as db:
+                        db.deserialize('main', file)
+                        cursor = db.cursor()
+                        cursor.execute('SELECT * FROM Frames5800;')
+                        frames = cursor.fetchall()
+                        log_data = []
+                        for frame in frames:
+                            log_data.append({
+                                "id": frame[0],
+                                "freq_arr": frame[1],
+                                "time": frame[2],
+                                "note": frame[3]
+                            })
+                        return {
+                            "result": True,
+                            "log_data": log_data,
+                            "type": 5800
+                        }
+                except: 
+                    return {
+                        "result": False
+                    }
 
 class getLogData(APIView):
     def post(self, request):

@@ -78,20 +78,11 @@ class LogData extends Component{
                         {this.props.cur_frame.zone_state?
                             JSON.parse(this.props.cur_frame.zone_state).anom_type?
                                 <p className="ano_type">
-                                    Метрика № 1 - {this.anom_types[JSON.parse(this.props.cur_frame.zone_state).anom_type.classifyResult_5from2]}
+                                    Автоанализ - {this.anom_types[JSON.parse(this.props.cur_frame.zone_state).anom_type]}
                                 </p>:
-                                <p className="ano_type">Метрика № 1 - {this.anom_types[0]}</p>
+                                <p className="ano_type">Автоанализ - {this.anom_types[0]}</p>
                             :
-                            <p className="ano_type">Метрика № 1 - {this.anom_types[0]}</p>
-                        }
-                        {this.props.cur_frame.zone_state?
-                            JSON.parse(this.props.cur_frame.zone_state).anom_type?
-                                <p className="ano_type">
-                                    Метрика № 2 - {this.anom_types[JSON.parse(this.props.cur_frame.zone_state).anom_type.classifyResult_10from2]}
-                                </p>:
-                                <p className="ano_type">Метрика № 2 - {this.anom_types[0]}</p>
-                            :
-                            <p className="ano_type">Метрика № 2 - {this.anom_types[0]}</p>
+                            <p className="ano_type">Автоанализ - {this.anom_types[0]}</p>
                         }
                     </div>
                     <div className="block">

@@ -1,0 +1,54 @@
+.settingsSet{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.settingsSet .block{
+    height: 50%;
+    width: 6px;
+    border-radius: 3px;
+    background-color: whitesmoke;
+}
+
+.settingsSet .title{
+    width: 100%;
+    text-align: center;
+    font-family: "JetBrains Mono";
+    margin: 10px 0 20px 0;
+    color: whitesmoke;
+    font-size: 25px;
+}
+
+.settingsSet .col_it{
+    width: 30%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
+.settingsSet .col_it p{
+    color: whitesmoke;
+    width: 100%;
+    text-align: center;
+    font-size: 20px;
+    font-family: "JetBrains Mono";
+    margin: 0;
+    margin-bottom: 10px;
+}
+.settingsSet .col_it .col_ex{
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+.settingsSet .col_it .change{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.settingsSet .col_it .change .color{
+    width: 100%;
+}

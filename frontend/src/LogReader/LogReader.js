@@ -6,6 +6,7 @@ import LogLoad from "./LogLoad/LogLoad";
 import axios from "axios";
 import LogPlayerSmall from "./LogPlayerSmall/LogPlayerSmall";
 import LogPlayerMulti from "./LogPlayerMulti/LogPlayerMulti";
+import LogPlayer5800 from "./LogPlayer5800/LogPlayer5800";
 
 class LogReader extends Component{
     constructor(props){
@@ -48,6 +49,12 @@ class LogReader extends Component{
                         log_data: response.data.log_data,
                         file_name: e.target.files[0].name, 
                         log_type: "multi"
+                    })
+                }else if (response.data.type == 5800){
+                    this.setState({
+                        log_data: response.data.log_data,
+                        file_name: e.target.files[0].name,
+                        log_type: 5800
                     })
                 }
             }
@@ -132,6 +139,14 @@ class LogReader extends Component{
                         refresh={this.refresh}
                         updateModal={this.props.updateModal}
                     />:""
+                }
+                {(this.state.log_data!=null && this.state.log_type==5800)?
+                    <LogPlayer5800
+                        log_data={this.state.log_data}
+                        file_name={this.state.file_name}
+                        refresh={this.refresh}
+                        updateModal={this.props.updateModal}
+                    />:""    
                 }
                 {this.state.log_dataSmall!=null?
                     <div className="mult_player">

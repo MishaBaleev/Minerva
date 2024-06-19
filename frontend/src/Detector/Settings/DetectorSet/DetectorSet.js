@@ -10,7 +10,7 @@ class DetectorSet extends Component{
             act_an: ""
         }
 
-        this.anom_types = ["Не определено", "Mavic - пульт", "Mavic - wi-fi", "wi-fi"]
+        this.anom_types = ["Не определено", "Mavic - пульт", "Mavic - wi-fi", "wi-fi download", "wi-fi upload"]
 
         this.changeCritLev = this.changeCritLev.bind(this)
     }
@@ -57,10 +57,7 @@ class DetectorSet extends Component{
                         {this.props.zone_state==0?"Не определено":(this.props.zone_state==1?"Аномалия":"Аномалии не обнаружены")}
                     </p>
                     <p className="anom">
-                        Метрика № 1<br/>{this.anom_types[this.props.anom_type.classifyResult_5from2]}
-                    </p>
-                    <p className="anom">
-                        Метрика № 2<br/>{this.anom_types[this.props.anom_type.classifyResult_10from2]}
+                        Автоматический анализ<br/>{this.anom_types[this.props.anom_type]}
                     </p>
                 </div>
                 <div className="block"></div>

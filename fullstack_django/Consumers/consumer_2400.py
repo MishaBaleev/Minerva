@@ -63,10 +63,7 @@ class Consumer_2400(WebsocketConsumer):
                     "type": 0,
                     "targets": [],
                     "temp_results": [],
-                    "anom_type": {
-                        "classifyResult_5from2": 0,
-                        "classifyResult_10from2": 0
-                    }
+                    "anom_type": 0
                 }
                 send_data = {
                     "frame": frame,

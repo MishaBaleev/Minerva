@@ -2,17 +2,19 @@ import apsw
 import json
 from os import listdir
 
-CENTERS_5FROM2 = [43.17368303, 59.55606945, 83.99677811]
+CENTERS_5FROM2 = [75.06358997, 65.94311475, 46.93330667, 66.7732988]
 RANGES_5FROM2 = [
-    [23.22533548, 76.92892293],
-    [14.88095238, 89.52122855],
-    [78.5355116, 98.25306045]
+    [67.24137931, 77.55102041], #wi-fi download
+    [66, 70.58823529], #wiw-fi upload
+    [57.57575758, 66.66666666], #wi-fi control
+    [55.71428571, 71.69811321] #hand-control
 ]
-CENTERS_10FROM2 = [25.85470844, 15.858277, 76.36046154]
+CENTERS_10FROM2 = [68.14632137, 63.66633242, 4.35890836, 56.75914416]
 RANGES_10FROM2 = [
-    [12.15110633, 44.35394254],
-    [1.734693878, 76.16050354],
-    [61.56010404, 86.26145459]
+    [57.37704918, 75.51020408], #wi-fi download
+    [50, 68.88888889], #wiw-fi upload
+    [1.515151515, 5.714285714], #wi-fi control
+    [54.09836066, 60.71428571] #hand-control
 ]
 
 def isIn(target:float, range:list) -> bool:
@@ -27,9 +29,11 @@ def predictAnomalies(percent:float, ranges, centers) -> int:
     for range in ranges:
         isInArray.append(isIn(percent, range))
     match isInArray:
-        case [True, False, False]: return 1
-        case [False, True, False]: return 2
-        case [False, False, True]: return 3
+        case [True, False, False, False]: return 1
+        case [False, True, False, False]: return 2
+        case [False, False, True, False]: return 3
+        case [False, False, False, True]: return 4
+        case [False, False, False, False]: return 5
     
     minDist = 101
     result = 0
@@ -78,12 +82,12 @@ if __name__ == "__main__":
             
             counter = 0
             for r in res1Array:
-                if r == 2: counter += 1
+                if r == 5: counter += 1
             print(f"Точность первой метрики - {counter/len(data)*100}%")  
 
             counter = 0
             for r in res2Array:
-                if r == 2: counter += 1
+                if r == 5: counter += 1
             print(f"Точность второй метрики - {counter/len(data)*100}%")  
         except:
             pass
