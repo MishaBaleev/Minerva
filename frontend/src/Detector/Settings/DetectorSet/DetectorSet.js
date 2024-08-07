@@ -20,7 +20,6 @@ class DetectorSet extends Component{
     }
 
     render(){
-        console.log(this.props)
         return(
             <div className="detect_set">
                 <div className="analize">

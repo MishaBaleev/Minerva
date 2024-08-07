@@ -1,4 +1,4 @@
-.controls5800{
+.controls{
     width: 30%;
     height: calc(80vh - 160px);
     display: flex;
@@ -17,6 +17,16 @@
             align-items: center;
             padding: 10px 20px;
             background-color:  #4c4b4b;
+            .graph_view{
+                width: 100%;
+                height: 40px;
+                font-size: 20px;
+                margin-bottom: 10px;
+                text-align: center;
+                &:focus{
+                    outline: none;
+                }
+            }
             .act_sq{
                 padding: 0 5px;
                 height: 40px;

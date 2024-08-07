@@ -17,6 +17,10 @@ class Consumer_Multi(WebsocketConsumer):
             "rec_arr": [],
             "note": [],
         }
+        self.last_frame = {
+            "arr915": [],
+            "arr2400": []
+        }
     
     def stopRec(self, file_name):
         connection = sqlite3.connect(f"{os.getcwd().replace('fullstack_django', 'logs')}/{file_name}.db")
@@ -39,11 +43,12 @@ class Consumer_Multi(WebsocketConsumer):
     
     def stableCon(self):
         while self.serial_reader != None:
-            frame = self.serial_reader.getData()
+            frame, raw_data = self.serial_reader.getData()
             if frame != None:
                 send_data = {
                     "frame": frame,
-                    "time": time.time()
+                    "time": time.time(),
+                    "raw_data": raw_data
                 }
                 if self.base_config["is_rec"] == True:
                     rec_data = {
@@ -53,7 +58,15 @@ class Consumer_Multi(WebsocketConsumer):
                     }
                     self.base_config["note"] = []
                     self.base_config["rec_arr"].append(rec_data)
-
+                self.last_frame = frame
+                self.send(json.dumps(send_data))
+            else:
+                frame = self.last_frame
+                send_data = {
+                    "frame": frame,
+                    "time": time.time(),
+                    "raw_data": raw_data
+                }
                 self.send(json.dumps(send_data))
 
     def connect(self):

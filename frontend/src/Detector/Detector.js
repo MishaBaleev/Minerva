@@ -41,7 +41,8 @@ class Detector extends Component{
                 all_arr: [],
                 warning_arr: [],
                 safe_arr: []
-            }
+            },
+            raw_data: []
         }
 
         this.startSq = this.startSq.bind(this)
@@ -58,15 +59,28 @@ class Detector extends Component{
         this.algTestRes = this.algTestRes.bind(this)
     }
 
+    getTime(){
+        let unform_time = new Date()
+        let hours = unform_time.getHours()>=10?unform_time.getHours():("0"+unform_time.getHours())
+        let minutes = unform_time.getMinutes()>=10?unform_time.getMinutes():("0"+unform_time.getMinutes())
+        let seconds = unform_time.getSeconds()>=10?unform_time.getSeconds():("0"+unform_time.getSeconds())
+        return hours+":"+minutes+":"+seconds
+    }
+
     socOnMes(e){
         let data = JSON.parse(e.data)
-        console.log(data)
         let cur_state = {...this.state}
         cur_state.freq_arr = data.frame
         cur_state.norm_freq_arr = data.norm_frame
         cur_state.zone_state = data.zone_state
         cur_state.temp_results = data.zone_state.temp_results==null?this.state.temp_results:data.zone_state.temp_results
         cur_state.temp_time = data.zone_state.temp_results==null?this.state.temp_time:new Date().toLocaleTimeString()
+        let raw_data_arr = [...cur_state.raw_data]
+        raw_data_arr.push({
+            data: data.raw_data,
+            time: this.getTime()
+        })
+        cur_state.raw_data = raw_data_arr
         if (this.is_alg_test == true){
             cur_state.alg_test_res = {...this.algTestRes(data.zone_state)}
         }
@@ -234,6 +248,7 @@ class Detector extends Component{
                     actRec={this.actRec}
                     addNote={this.addNote}
                     changeGraphView={this.changeGraphView}
+                    console_data={this.state.raw_data}
                 />  
                 <Settings
                     changeCritLev={this.changeCritLev}

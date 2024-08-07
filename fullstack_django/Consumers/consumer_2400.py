@@ -4,6 +4,7 @@ from Readers.SerialReader import SerialReaderClass
 from threading import Thread
 from Detectors.Detector2400 import Detector
 import time
+import datetime
 import os
 import sqlite3
 
@@ -57,7 +58,7 @@ class Consumer_2400(WebsocketConsumer):
 
     def stableCon(self):
         while self.serial_reader != None:
-            frame = self.serial_reader.getData()
+            frame, raw_data = self.serial_reader.getData()
             if frame != None:
                 zone_state = {
                     "type": 0,
@@ -69,7 +70,8 @@ class Consumer_2400(WebsocketConsumer):
                     "frame": frame,
                     "norm_frame": normData(frame),
                     "time": time.time(),
-                    "zone_state": self.detector.analize(self.base_config["crit_level"], frame) if self.base_config["is_detect_act"]==True else zone_state
+                    "zone_state": self.detector.analize(self.base_config["crit_level"], frame) if self.base_config["is_detect_act"]==True else zone_state,
+                    "raw_data": str(raw_data)
                 }
                 if self.base_config["is_rec"] == True:
                     rec_data = {
@@ -84,7 +86,21 @@ class Consumer_2400(WebsocketConsumer):
                     self.base_config["rec_arr"].append(rec_data)
 
                 self.send(json.dumps(send_data))
-
+            else:
+                zone_state = {
+                    "type": 0,
+                    "targets": [],
+                    "temp_results": [],
+                    "anom_type": 0
+                }
+                send_data = {
+                    "frame": [],
+                    "norm_frame": [],
+                    "time": time.time(),
+                    "zone_state": zone_state,
+                    "raw_data": str(raw_data)
+                }
+                self.send(json.dumps(send_data))
     def connect(self):
         self.accept()
 

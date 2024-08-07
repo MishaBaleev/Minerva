@@ -1,0 +1,33 @@
+.console_2400{
+    &.big{
+        height: 160px;
+    }
+    &.small{
+        height: 86px;
+        width: 60%;
+    }
+    padding: 5px 10px;
+    background-color: #676767;
+    border-radius: 5px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        background-color: transparent;
+        width: 5px;
+    }
+    &::-webkit-scrollbar-thumb{
+        background-color: whitesmoke;
+        border-radius: 2.5px;
+    }
+    .line{
+        margin: 0 0 8px 0;
+        color: whitesmoke;
+        font-family: "JetBrains Mono";
+        font-size: 17px;
+        .time{
+            color: #02d402
+        }
+        .mes{
+            margin-left: 10px;
+        }
+    }
+}

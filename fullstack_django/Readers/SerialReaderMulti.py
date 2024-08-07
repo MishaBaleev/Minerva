@@ -13,14 +13,15 @@ class SerialReaderMultiClass():
     def parseData(self):
         arr915 = [0 for i in range(100)]
         arr2400 = [0 for i in range(82)]
+        # for item in self.raw_data: print(item, "------------\n")
         try:
-            json915 = json.loads(self.raw_data[0])
+            json915 = json.loads(self.raw_data[1])
             for key in json915.keys():
                 arr915[int(key)-820] = int(json915[key][0])
-        except: print("bad frame")
+        except: print("bad frame 915")
 
         try:
-            json2400 = json.loads(self.raw_data[1])
+            json2400 = json.loads(self.raw_data[3])
             channels_shift = {
                 "Channel_1": 0,
                 "Channel_2": 5,
@@ -40,7 +41,7 @@ class SerialReaderMultiClass():
                 for index, value in enumerate(json2400[key]):
                     target_index = index + channels_shift[key]
                     arr2400[target_index] = int(value)
-        except: print("bad frame")
+        except: print("bad frame 2400")
         self.raw_data = []
         return arr915, arr2400
         
@@ -53,6 +54,7 @@ class SerialReaderMultiClass():
             return {
                 "arr915": arr915,
                 "arr2400": arr2400
-            }
+            }, str(raw_data).replace("\n", "").replace("\r", "")
         else:
             self.raw_data.append(raw_data)
+            return None, str(raw_data).replace("\n", "").replace("\r", "")

@@ -15,7 +15,8 @@ class DetectorMulti extends Component{
         this.state = {
             data915: [],
             data2400: [],
-            updateTime: "00:00:00"
+            updateTime: "00:00:00",
+            raw_data: []
         }
 
         this.socOnMes = this.socOnMes.bind(this)
@@ -33,12 +34,25 @@ class DetectorMulti extends Component{
         return hours+":"+minutes+":"+seconds
     }
 
+    getTime(){
+        let unform_time = new Date()
+        let hours = unform_time.getHours()>=10?unform_time.getHours():("0"+unform_time.getHours())
+        let minutes = unform_time.getMinutes()>=10?unform_time.getMinutes():("0"+unform_time.getMinutes())
+        let seconds = unform_time.getSeconds()>=10?unform_time.getSeconds():("0"+unform_time.getSeconds())
+        return hours+":"+minutes+":"+seconds
+    }
     socOnMes(e){
         let data = JSON.parse(e.data)
+        let raw_data_arr = [...this.state.raw_data]
+        raw_data_arr.push({
+            data: data.raw_data,
+            time: this.getTime()
+        })
         this.setState({
             data915: data.frame.arr915,
             data2400: data.frame.arr2400,
-            updateTime: this.getUpdateTime()
+            updateTime: this.getUpdateTime(),
+            raw_data: raw_data_arr
         })
         console.log(data)
     }
@@ -94,6 +108,7 @@ class DetectorMulti extends Component{
                 startSq={this.startSq}
                 offSq={this.offSq}
                 updateTime={this.state.updateTime}
+                console_data={this.state.raw_data}
             />
             <div className="graphsM">
                 <GraphM

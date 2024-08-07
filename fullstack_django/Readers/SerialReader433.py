@@ -19,8 +19,8 @@ class SerialReader433Class():
                 self.freq_arr[int(freq_index)-820] = int(f[freq_index])
 
     def getData(self):
+        raw_data = self.session.readline().decode()
         try:
-            raw_data = self.session.readline().decode()
             if raw_data:
                 data = json.loads(raw_data.replace("'", '"'))
                 self.raw_data.append(data)
@@ -29,8 +29,11 @@ class SerialReader433Class():
                     result = self.freq_arr
                     self.freq_arr = [0 for i in range(101)]
                     self.raw_data = []
-                    return result
-            return None
-                
-        except ValueError as err:
-            print(err)
+                    return result, str(raw_data).replace("\n", "").replace("\r", "")
+                else:
+                    return None, str(raw_data).replace("\n", "").replace("\r", "")
+            else: 
+                return None, str(raw_data).replace("\n", "").replace("\r", "")    
+        except:
+            return None, str(raw_data).replace("\n", "").replace("\r", "") 
+

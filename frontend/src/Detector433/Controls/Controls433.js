@@ -1,10 +1,11 @@
 import React, {Component} from "react";
 import { connect } from 'react-redux';
-import "./controls433.css";
+import "./controls433.scss";
 import refresh from "./img/refresh.png";
 import add from "./img/add.png";
 import axios from "axios";
 import { setCon433, setStartCon433, setRec433 } from "../../AppSlice";
+import Console from "../../Console/Console";
 
 class Controls433 extends Component{
     constructor(props){
@@ -148,51 +149,57 @@ class Controls433 extends Component{
     render(){
         return(
             <div className="controls433">
-                <div className="title">
-                    <button className={"act_sq "+this.state.act_sq} onClick={this.actSq}>
-                        <div className={this.state.act_sq}></div>
-                    </button>
-                    <select className="act_int" onChange={this.changeInt} value={this.state.int}>
-                        {this.state.ints.map((item, index) => {
-                            return <option value={index} key={index}>{item}</option>
-                        })}
-                    </select>
-                    <button className="act_refresh" onClick={this.getInts}>
-                        <img src={refresh} alt="refresh"/>
-                    </button>
-                </div>
-                <div className="record">
-                    <div className="rec_title">
-                        <button className={"act_rec "+this.state.act_rec} onClick={this.actRec}>
-                            <div className={this.state.act_rec}></div>
+                <div className="manage">
+                    <div className="title">
+                        <button className={"act_sq "+this.state.act_sq} onClick={this.actSq}>
+                            <div className={this.state.act_sq}></div>
                         </button>
-                        <p className="rec_text">Запись</p>
-                        <p className="rec_time">{this.state.time_count}</p>
-                        <input className="rec_name"
-                            type="text"
-                            placeholder="Имя записи"
-                            onChange={this.changeRecName}
-                        />
-                    </div>
-                    <div className="com_input">
-                        <input
-                            type="text"
-                            placeholder="Заметка"
-                            value={this.state.note}
-                            onChange={(e) => {this.changeNote(e.target.value)}}
-                        />
-                        <button className="add" onClick={this.addNote}>
-                            <img src={add} alt="add"/>
+                        <select className="act_int" onChange={this.changeInt} value={this.state.int}>
+                            {this.state.ints.map((item, index) => {
+                                return <option value={index} key={index}>{item}</option>
+                            })}
+                        </select>
+                        <button className="act_refresh" onClick={this.getInts}>
+                            <img src={refresh} alt="refresh"/>
                         </button>
                     </div>
-                    <ul className="com_list">
-                        {this.comms.map((item, index) => {
-                            return <li key={index} onClick={() => {this.changeNote(item)}}>
-                                <span>{item}</span>
-                            </li>
-                        })}
-                    </ul>
+                    <div className="record">
+                        <div className="rec_title">
+                            <button className={"act_rec "+this.state.act_rec} onClick={this.actRec}>
+                                <div className={this.state.act_rec}></div>
+                            </button>
+                            <p className="rec_text">Запись</p>
+                            <p className="rec_time">{this.state.time_count}</p>
+                            <input className="rec_name"
+                                type="text"
+                                placeholder="Имя записи"
+                                onChange={this.changeRecName}
+                            />
+                        </div>
+                        <div className="com_input">
+                            <input
+                                type="text"
+                                placeholder="Заметка"
+                                value={this.state.note}
+                                onChange={(e) => {this.changeNote(e.target.value)}}
+                            />
+                            <button className="add" onClick={this.addNote}>
+                                <img src={add} alt="add"/>
+                            </button>
+                        </div>
+                        <ul className="com_list">
+                            {this.comms.map((item, index) => {
+                                return <li key={index} onClick={() => {this.changeNote(item)}}>
+                                    <span>{item}</span>
+                                </li>
+                            })}
+                        </ul>
+                    </div>
                 </div>
+                <Console 
+                    is_big={true} 
+                    data={this.props.console_data}
+                />
             </div>
         )
     }

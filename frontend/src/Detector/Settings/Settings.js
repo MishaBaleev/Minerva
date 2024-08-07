@@ -5,6 +5,7 @@ import ViewSet from "./ViewSet/ViewSet";
 import { connect } from 'react-redux';
 import { setStartCon } from "../../AppSlice"; 
 import AlgTest from "./AlgTest/AlgTest";
+import Suppressor from "../../Suppressor/Suppressor";
 
 class Settings extends Component{
     constructor(props){
@@ -13,7 +14,8 @@ class Settings extends Component{
         this.set_cmps = [
             <DetectorSet/>,
             <ViewSet/>,
-            <AlgTest/>
+            <AlgTest/>,
+            <Suppressor/>
         ]
 
         this.state = {
@@ -90,6 +92,11 @@ class Settings extends Component{
                         className={"set "+ (this.state.cur_cmp==2?"active":"")}
                         onClick={() => {this.changeCmp(2)}}>
                         3
+                    </button>
+                    <button
+                        className={"set "+(this.state.cur_cmp==3?"active":"")}
+                        onClick={() => {this.changeCmp(3)}}>
+                        4
                     </button>
                 </div>
                 {cmp}

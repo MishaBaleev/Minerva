@@ -19,6 +19,7 @@ class Consumer_433(WebsocketConsumer):
             "note": [],
             "is_detect_act": False
         }
+        self.last_frame = []
         self.detector = Detector433()
     
     def stopRec(self, file_name):
@@ -43,7 +44,7 @@ class Consumer_433(WebsocketConsumer):
     
     def stableCon(self):
         while self.serial_reader != None:
-            frame = self.serial_reader.getData()
+            frame, raw_data = self.serial_reader.getData()
             if frame != None:
                 zone_state = {
                     "type": 0
@@ -51,7 +52,8 @@ class Consumer_433(WebsocketConsumer):
                 send_data = {
                     "frame": frame,
                     "time": time.time(),
-                    "zone_state": self.detector.analize(frame) if self.base_config["is_detect_act"]==True else zone_state
+                    "zone_state": self.detector.analize(frame) if self.base_config["is_detect_act"]==True else zone_state,
+                    "raw_data": str(raw_data)
                 }
                 if self.base_config["is_rec"] == True:
                     rec_data = {
@@ -63,6 +65,18 @@ class Consumer_433(WebsocketConsumer):
                     self.base_config["note"] = []
                     self.base_config["rec_arr"].append(rec_data)
 
+                self.last_frame = frame
+                self.send(json.dumps(send_data))
+            else:
+                zone_state = {
+                    "type": 0
+                }
+                send_data = {
+                    "frame": self.last_frame,
+                    "time": time.time(),
+                    "zone_state": zone_state,
+                    "raw_data": str(raw_data)
+                }
                 self.send(json.dumps(send_data))
 
     def connect(self):

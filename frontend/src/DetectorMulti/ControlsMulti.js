@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { setConMult, setStartConMult } from "../AppSlice";
 import refresh from "../Detector/Controls/img/refresh.png";
 import axios from "axios";
+import Console from "../Console/Console";
 
 class ControlsMuti extends Component{
     constructor(props){
@@ -78,18 +79,24 @@ class ControlsMuti extends Component{
 
     render(){
         return <div className="controlsM">
-            <button className={"act_sq "+this.state.act_sq} onClick={this.actSq}>
-                <div className={this.state.act_sq}></div>
-            </button>
-            <select className="act_int" onChange={this.changeInt} value={this.state.int}>
-                {this.state.ints.map((item, index) => {
-                    return <option value={index} key={index}>{item}</option>
-                })}
-            </select>
-            <button className="act_refresh" onClick={this.getInts}>
-                <img src={refresh} alt="refresh"/>
-            </button>
-            <p className="update">Обновлено в {this.props.updateTime}</p>
+            <div className="manage">
+                <button className={"act_sq "+this.state.act_sq} onClick={this.actSq}>
+                    <div className={this.state.act_sq}></div>
+                </button>
+                <select className="act_int" onChange={this.changeInt} value={this.state.int}>
+                    {this.state.ints.map((item, index) => {
+                        return <option value={index} key={index}>{item}</option>
+                    })}
+                </select>
+                <button className="act_refresh" onClick={this.getInts}>
+                    <img src={refresh} alt="refresh"/>
+                </button>
+                <p className="update">Обновлено в {this.props.updateTime}</p>
+            </div>
+            <Console 
+                is_big={false}
+                data={this.props.console_data}
+            />
         </div>
     }
 }
@@ -99,7 +106,6 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps =  (dispatch) => {
 return {
-    // "setTest": (data) => dispatch(setTest(data))
     "setStartConMult": (data) => dispatch(setStartConMult(data)),
     "setConMult": (data) => dispatch(setConMult(data))
 }
