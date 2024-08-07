@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./header.css";
+import "./header.scss";
 import logo from "./img/logo.png";
 import detector from "./img/detector.png";
 import log_reader from "./img/log_reader.png"
@@ -88,8 +88,11 @@ class Header extends Component{
                     {/* <button onClick={this.readSerial}>reader</button>
                     <button onClick={this.read}>read</button> */}
                 </div>
-                <div className="time">
-                    <p>{this.state.cur_time}</p>
+                <div className="exit">
+                    <button className="exit_prog" onClick={this.exitProgramm}></button>
+                    <div className="time">
+                        <p>{this.state.cur_time}</p>
+                    </div>
                 </div>
             </div>
         )

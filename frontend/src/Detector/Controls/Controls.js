@@ -161,7 +161,7 @@ class Controls extends Component{
 
     render(){
         return(
-            <div className="controls">
+            <div className="controls2400">
                 <div className="manage">
                     <div className="title">
                         <select className="graph_view" onChange={(e) => {this.props.changeGraphView(e.target.value)}}>

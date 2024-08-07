@@ -29,6 +29,7 @@ class App extends Component{
 
     this.state = {
       active_cmp: localStorage.getItem("cur_cmp")!=null?localStorage.getItem("cur_cmp"):0,
+      // active_cmp: 2,
       is_int_ready: false,
       is_mod_act: false,
       mod_data: {}
