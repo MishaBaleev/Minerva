@@ -222,7 +222,7 @@ def writeDataXLS(data, file_name):
     chart3.series.append(series3)
     ws.add_chart(chart3, "W2")
 
-    wb.save(f"{os.getcwd().replace('fullstack_django', 'reports')}/{file_name[:len(file_name)-3]}.xlsx")
+    wb.save(f"{os.getcwd().replace('backend', 'reports')}/{file_name[:len(file_name)-3]}.xlsx")
 
 def writeGraph(x_data, y_data, style, start, ws, x_labels, y_labels, title, start_col):
     chart = ScatterChart()
@@ -262,13 +262,14 @@ def writeDataXLS915(data, file_name):
     for i in range(2, len(data["time_data"])+2):
         ws[f"A{i}"].fill = green_fill
 
+    print(data["time_data"])
     writeGraph(data["time_data"], data["activity_data"], 13, "j2", ws, "Time", "Activity", "Graph of changes in the workload of the activity", 2)
     writeGraph(data["time_data"], data["max_data"], 15, "j29", ws, "Time", "Max_value", "Graph of changes in the workload of the max value", 4)
     writeGraph(data["time_data"], data["av_rssi_data"], 18, "W2", ws, "Time", "av_rssi", "Graph of changes in the workload of the rssi", 6)
     writeGraph(data["time_data"], data["under_rssi_data"], 13, "W29", ws, "Time", f"under_{data['rssi_level']}", "Graph of changes in the workload under rssi", 8)
 
 
-    wb.save(f"{os.getcwd().replace('fullstack_django', 'reports')}/{file_name[:len(file_name)-3]}.xlsx")
+    wb.save(f"{os.getcwd().replace('backend', 'reports')}/{file_name[:len(file_name)-3]}.xlsx")
 
 class analizeLog(APIView):
     def post(self, request):

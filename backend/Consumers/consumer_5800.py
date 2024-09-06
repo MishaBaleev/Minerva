@@ -22,7 +22,7 @@ class Consumer_5800(WebsocketConsumer):
         self.detector = Detector5800()
     
     def stopRec(self, file_name):
-        connection = sqlite3.connect(f"{os.getcwd().replace('fullstack_django', 'logs')}/{file_name}.db")
+        connection = sqlite3.connect(f"{os.getcwd().replace('backend', 'logs')}/{file_name}.db")
         cursor = connection.cursor()
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS Frames5800 (
@@ -43,7 +43,7 @@ class Consumer_5800(WebsocketConsumer):
     
     def stableCon(self):
         while self.serial_reader != None:
-            frame = self.serial_reader.getData()
+            frame, raw_data = self.serial_reader.getData()
             if frame != None:
                 zone_state = {
                     "type": 0
@@ -51,7 +51,8 @@ class Consumer_5800(WebsocketConsumer):
                 send_data = {
                     "frame": frame,
                     "time": time.time(),
-                    "zone_state": self.detector.analize(frame) if self.base_config["is_detect_act"]==True else zone_state
+                    "zone_state": self.detector.analize(frame) if self.base_config["is_detect_act"]==True else zone_state,
+                    "raw_data": str(raw_data)
                 }
                 if self.base_config["is_rec"] == True:
                     rec_data = {
@@ -64,6 +65,17 @@ class Consumer_5800(WebsocketConsumer):
                     self.base_config["rec_arr"].append(rec_data)
 
                 self.send(json.dumps(send_data))
+            else:
+                zone_state = {
+                    "type": 0
+                }
+                send_data = {
+                    "frame": [],
+                    "time": time.time(),
+                    "zone_state": zone_state,
+                    "raw_data": str(raw_data)
+                }
+                self.send(json.dumps(send_data))
 
     def connect(self):
         self.accept()
@@ -73,14 +85,17 @@ class Consumer_5800(WebsocketConsumer):
         command = data["command"]
         match command:
             case  "start":
-                print(data["start_config"])
-                interface = data["start_config"]["int"]
-                self.base_config["is_detect_act"] = data["start_config"]["is_detect_act"]
-                self.serial_reader = SerialReader5800Class(interface)
-                self.serial_reader.createCon()
-                self.thread = Thread(target=self.stableCon, args={})
-                self.thread.daemon = True 
-                self.thread.start()
+                try: 
+                    print(data["start_config"])
+                    interface = data["start_config"]["int"]
+                    self.base_config["is_detect_act"] = data["start_config"]["is_detect_act"]
+                    self.serial_reader = SerialReader5800Class(interface)
+                    self.serial_reader.createCon()
+                    self.thread = Thread(target=self.stableCon, args={})
+                    self.thread.daemon = True 
+                    self.thread.start()
+                except:
+                    self.send(json.dumps({"recieve": "Ошибка при подключении к порту"}))
             case  "off":
                 self.serial_reader = None
                 self.thread.join()

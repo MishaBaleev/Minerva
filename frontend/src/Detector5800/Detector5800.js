@@ -23,7 +23,8 @@ class Detector5800 extends Component{
             zone_state: {
                 type: 0
             },
-            update_time: "00:00:00"
+            update_time: "00:00:00",
+            raw_data: []
         }
         
         this.startSq = this.startSq.bind(this)
@@ -52,16 +53,33 @@ class Detector5800 extends Component{
         this.socket.send(JSON.stringify(data))
         this.socket.onmessage = this.socOnMes
     }
+    getTime(){
+        let unform_time = new Date()
+        let hours = unform_time.getHours()>=10?unform_time.getHours():("0"+unform_time.getHours())
+        let minutes = unform_time.getMinutes()>=10?unform_time.getMinutes():("0"+unform_time.getMinutes())
+        let seconds = unform_time.getSeconds()>=10?unform_time.getSeconds():("0"+unform_time.getSeconds())
+        return hours+":"+minutes+":"+seconds
+    }
     socOnMes(e){
         let data = JSON.parse(e.data)
-        console.log(data)
-        let cur_state = {...this.state}
-        cur_state.freq_arr = data.frame
-        cur_state.update_time = this.getUpdateTime()
-        cur_state.zone_state = data.zone_state
-        this.setState(state => ({
-            ...cur_state
-        }))
+        if (data.recieve){
+            this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
+        }else{
+            console.log(data)
+            let cur_state = {...this.state}
+            cur_state.freq_arr = data.frame
+            cur_state.update_time = this.getUpdateTime()
+            cur_state.zone_state = data.zone_state
+            let raw_data_arr = [...cur_state.raw_data]
+            raw_data_arr.push({
+                data: data.raw_data,
+                time: this.getTime()
+            })
+            cur_state.raw_data = raw_data_arr
+            this.setState(state => ({
+                ...cur_state
+            }))
+        }
     }
     offSq(){
         let data = {
@@ -128,6 +146,7 @@ class Detector5800 extends Component{
                     offSq={this.offSq}
                     actRec={this.actRec}
                     addNote={this.addNote}
+                    console_data={this.state.raw_data}
                 />
                 <Settings5800
                     gr_colors={this.state.gr_colors}

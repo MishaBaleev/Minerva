@@ -6,7 +6,7 @@ import InfoMult from "./InfoMult";
 import { connect } from 'react-redux';
 import { setStartConMult } from "../AppSlice";
 
-class DetectorMulti extends Component{
+class DetectorMultiX2 extends Component{
     constructor(props){
         super(props)
 
@@ -43,18 +43,22 @@ class DetectorMulti extends Component{
     }
     socOnMes(e){
         let data = JSON.parse(e.data)
-        let raw_data_arr = [...this.state.raw_data]
-        raw_data_arr.push({
-            data: data.raw_data,
-            time: this.getTime()
-        })
-        this.setState({
-            data915: data.frame.arr915,
-            data2400: data.frame.arr2400,
-            updateTime: this.getUpdateTime(),
-            raw_data: raw_data_arr
-        })
-        console.log(data)
+        if (data.recieve){
+            this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
+        }else{
+            let raw_data_arr = [...this.state.raw_data]
+            raw_data_arr.push({
+                data: data.raw_data,
+                time: this.getTime()
+            })
+            this.setState({
+                data915: data.frame.arr915,
+                data2400: data.frame.arr2400,
+                updateTime: this.getUpdateTime(),
+                raw_data: raw_data_arr
+            })
+            console.log(data)
+        }
     }
 
     startSq(){
@@ -141,4 +145,4 @@ const mapDispatchToProps =  (dispatch) => {
         "setStartConMult": (data) => dispatch(setStartConMult(data)),
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(DetectorMulti)
+export default connect(mapStateToProps, mapDispatchToProps)(DetectorMultiX2)

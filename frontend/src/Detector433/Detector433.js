@@ -62,20 +62,24 @@ class Detector433 extends Component{
     }
     socOnMes(e){
         let data = JSON.parse(e.data)
-        console.log(data)
-        let cur_state = {...this.state}
-        cur_state.freq_arr = data.frame
-        cur_state.update_time = this.getUpdateTime()
-        cur_state.zone_state = data.zone_state
-        let raw_data_arr = [...cur_state.raw_data]
-        raw_data_arr.push({
-            data: data.raw_data,
-            time: this.getTime()
-        })
-        cur_state.raw_data = raw_data_arr
-        this.setState(state => ({
-            ...cur_state
-        }))
+        if (data.recieve){
+            this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
+        }else{
+            console.log(data)
+            let cur_state = {...this.state}
+            cur_state.freq_arr = data.frame
+            cur_state.update_time = this.getUpdateTime()
+            cur_state.zone_state = data.zone_state
+            let raw_data_arr = [...cur_state.raw_data]
+            raw_data_arr.push({
+                data: data.raw_data,
+                time: this.getTime()
+            })
+            cur_state.raw_data = raw_data_arr
+            this.setState(state => ({
+                ...cur_state
+            }))
+        }
     }
     offSq(){
         let data = {

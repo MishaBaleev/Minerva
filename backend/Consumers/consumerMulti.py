@@ -23,7 +23,7 @@ class Consumer_Multi(WebsocketConsumer):
         }
     
     def stopRec(self, file_name):
-        connection = sqlite3.connect(f"{os.getcwd().replace('fullstack_django', 'logs')}/{file_name}.db")
+        connection = sqlite3.connect(f"{os.getcwd().replace('backend', 'logs')}/{file_name}.db")
         cursor = connection.cursor()
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS FramesMulti (
@@ -77,13 +77,16 @@ class Consumer_Multi(WebsocketConsumer):
         command = data["command"]
         match command:
             case  "start":
-                print(data["start_config"])
-                interface = data["start_config"]["int"]
-                self.serial_reader = SerialReaderMultiClass(interface)
-                self.serial_reader.createCon()
-                self.thread = Thread(target=self.stableCon, args={})
-                self.thread.daemon = True 
-                self.thread.start()
+                try:
+                    print(data["start_config"])
+                    interface = data["start_config"]["int"]
+                    self.serial_reader = SerialReaderMultiClass(interface)
+                    self.serial_reader.createCon()
+                    self.thread = Thread(target=self.stableCon, args={})
+                    self.thread.daemon = True 
+                    self.thread.start()
+                except:
+                    self.send(json.dumps({"recieve": "Ошибка при подключении к порту"}))
             case  "off":
                 self.serial_reader = None
                 self.thread.join()

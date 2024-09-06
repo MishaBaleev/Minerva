@@ -13,15 +13,19 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 import Loading from "./Loading/Loading";
 import Modal from "./Modal/Modal";
 import Detector433 from "./Detector433/Detector433";
-import DetectorMulti from "./DetectorMulti/DetectorMulti";
+import DetectorMultiX2 from "./DetectorMultiX2/DetectorMultiX2";
 import Detector5800 from "./Detector5800/Detector5800";
+import DetectorMultiX3 from "./DetectorMultiX3/DetectorMultiX3";
+import DetectorCommon from "./DetectorCommon/DetectorCommon";
 
 class App extends Component{
   constructor(props){
     super(props)
     this.cmps = [
+      <DetectorCommon/>,
       <Detector5800/>,
-      <DetectorMulti/>,
+      <DetectorMultiX3/>,
+      <DetectorMultiX2/>,
       <Detector433/>,
       <Detector/>,
       <LogReader/>

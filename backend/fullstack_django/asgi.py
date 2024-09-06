@@ -20,6 +20,7 @@ from Consumers.consumer_2400 import Consumer_2400
 from Consumers.consumer_433 import Consumer_433
 from Consumers.consumer_5800 import Consumer_5800
 from Consumers.consumerMulti import Consumer_Multi
+from Consumers.consumer_multX3 import Consumer_MultiX3 
 django_asgi_app = get_asgi_application()
 application = ProtocolTypeRouter({
     'http': django_asgi_app,
@@ -28,7 +29,8 @@ application = ProtocolTypeRouter({
             path("con_5800", Consumer_5800.as_asgi()),
             path("con_2400", Consumer_2400.as_asgi()),
             path("con_433", Consumer_433.as_asgi()),
-            path("con_multi", Consumer_Multi.as_asgi())
+            path("con_multi", Consumer_Multi.as_asgi()),
+            path("con_multiX3", Consumer_MultiX3.as_asgi())
         ])
     )
 })

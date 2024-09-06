@@ -69,24 +69,28 @@ class Detector extends Component{
 
     socOnMes(e){
         let data = JSON.parse(e.data)
-        let cur_state = {...this.state}
-        cur_state.freq_arr = data.frame
-        cur_state.norm_freq_arr = data.norm_frame
-        cur_state.zone_state = data.zone_state
-        cur_state.temp_results = data.zone_state.temp_results==null?this.state.temp_results:data.zone_state.temp_results
-        cur_state.temp_time = data.zone_state.temp_results==null?this.state.temp_time:new Date().toLocaleTimeString()
-        let raw_data_arr = [...cur_state.raw_data]
-        raw_data_arr.push({
-            data: data.raw_data,
-            time: this.getTime()
-        })
-        cur_state.raw_data = raw_data_arr
-        if (this.is_alg_test == true){
-            cur_state.alg_test_res = {...this.algTestRes(data.zone_state)}
+        if (data.recieve){
+            this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
+        }else{
+            let cur_state = {...this.state}
+            cur_state.freq_arr = data.frame
+            cur_state.norm_freq_arr = data.norm_frame
+            cur_state.zone_state = data.zone_state
+            cur_state.temp_results = data.zone_state.temp_results==null?this.state.temp_results:data.zone_state.temp_results
+            cur_state.temp_time = data.zone_state.temp_results==null?this.state.temp_time:new Date().toLocaleTimeString()
+            let raw_data_arr = [...cur_state.raw_data]
+            raw_data_arr.push({
+                data: data.raw_data,
+                time: this.getTime()
+            })
+            cur_state.raw_data = raw_data_arr
+            if (this.is_alg_test == true){
+                cur_state.alg_test_res = {...this.algTestRes(data.zone_state)}
+            }
+            this.setState(state => ({
+                ...cur_state
+            }))
         }
-        this.setState(state => ({
-            ...cur_state
-        }))
     }
 
     startSq(){

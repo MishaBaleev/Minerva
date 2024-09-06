@@ -34,7 +34,7 @@ class Consumer_2400(WebsocketConsumer):
         }
 
     def stopRec(self, file_name):
-        connection = sqlite3.connect(f"{os.getcwd().replace('fullstack_django', 'logs')}/{file_name}.db")
+        connection = sqlite3.connect(f"{os.getcwd().replace('backend', 'logs')}/{file_name}.db")
         cursor = connection.cursor()
         cursor.execute('''
             CREATE TABLE IF NOT EXISTS Frames (
@@ -109,15 +109,18 @@ class Consumer_2400(WebsocketConsumer):
         command = data["command"]
         match command:
                 case "start":
-                    print(data["start_config"])
-                    interface = data["start_config"]["int"]
-                    self.base_config["crit_level"] = float(data["start_config"]["crit_level"])
-                    self.base_config["is_detect_act"] = data["start_config"]["is_detect_act"]
-                    self.serial_reader = SerialReaderClass(interface)
-                    self.serial_reader.createCon()
-                    self.thread = Thread(target=self.stableCon, args={})
-                    self.thread.daemon = True 
-                    self.thread.start()
+                    try: 
+                        print(data["start_config"])
+                        interface = data["start_config"]["int"]
+                        self.base_config["crit_level"] = float(data["start_config"]["crit_level"])
+                        self.base_config["is_detect_act"] = data["start_config"]["is_detect_act"]
+                        self.serial_reader = SerialReaderClass(interface)
+                        self.serial_reader.createCon()
+                        self.thread = Thread(target=self.stableCon, args={})
+                        self.thread.daemon = True 
+                        self.thread.start()
+                    except: 
+                        self.send(json.dumps({"recieve": "Ошибка при подключении к порту"}))
                 case "off":
                     self.serial_reader = None
                     self.thread.join()

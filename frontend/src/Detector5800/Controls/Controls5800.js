@@ -196,7 +196,10 @@ class Controls5800 extends Component{
                         </ul>
                     </div>
                 </div>
-                <Console is_big={true}/>
+                <Console 
+                    is_big={true} 
+                    data={this.props.console_data}
+                />
             </div>
         )
     }

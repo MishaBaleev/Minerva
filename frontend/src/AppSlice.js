@@ -31,6 +31,13 @@ export const appSlice = createSlice({
         },
         is_con5800: false,
         is_rec5800: false,
+
+        start_configMultX3:{
+            int: "",
+            is_detect_act: false
+        },
+        is_conMultX3: false,
+        is_recMultX3: false,
     },
     reducers: {
         setStartCon: (state, action) => {
@@ -75,7 +82,17 @@ export const appSlice = createSlice({
         setRec5800: (state, action) => {
             state.is_rec5800 = action.payload
         },
+
+        setStartConMultX3: (state, action) => {
+            state.start_configMultX3[action.payload.key] = action.payload.value
+        },
+        setConMultX3: (state, action) => {
+            state.is_conMultX3 = action.payload
+        },
+        setRecMultX3: (state, action) => {
+            state.is_recMultX3 = action.payload
+        },
     }
 })
-export const {setStartCon, setCon, setRec, setStartCon433, setCon433, setRec433, setTest, setStartConMult, setConMult, setRecMult, setStartCon5800, setCon5800, setRec5800} = appSlice.actions 
+export const {setStartCon, setCon, setRec, setStartCon433, setCon433, setRec433, setTest, setStartConMult, setConMult, setRecMult, setStartCon5800, setCon5800, setRec5800, setStartConMultX3, setConMultX3, setRecMultX3} = appSlice.actions 
 export default appSlice.reducer

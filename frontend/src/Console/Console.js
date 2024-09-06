@@ -1,9 +1,8 @@
-import { useState, UseEffect } from "react";
+import { useState, UseEffect, useEffect } from "react";
 import "./console.scss";
 
 function Console(props){
-    const cons_arr = []
-    return <div className={"console_2400 " + (props.is_big?"big":"small")}>
+    return <div className={"console_data " + (props.is_big?"big":"small")}>
         {props.data.reverse().map((item, index) => {
             return <p key={index} className="line" title={item.data}>
                 <span className="time">{item.time}</span>

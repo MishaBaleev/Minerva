@@ -17,14 +17,14 @@ class SerialReader5800Class():
         return freq_arr
 
     def getData(self):
+        raw_data = self.session.readline()
         try:
-            raw_data = self.session.readline().decode().replace("'", '"')
-            if raw_data:
-                try: return self.parseData(json.loads(raw_data))
+            line_data = raw_data.decode().replace("'", '"')
+            if line_data:
+                try: 
+                    return self.parseData(json.loads(line_data)), str(raw_data).replace("\n", "").replace("\r", "")
                 except: 
-                    # print(error)
-                    return None
-            return None
-                
+                    return None, str(raw_data).replace("\n", "").replace("\r", "")
+            return None, str(raw_data).replace("\n", "").replace("\r", "")    
         except ValueError as err:
-            print(err)
+            return None, str(raw_data).replace("\n", "").replace("\r", "")
