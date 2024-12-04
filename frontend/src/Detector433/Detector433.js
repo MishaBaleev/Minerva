@@ -65,7 +65,6 @@ class Detector433 extends Component{
         if (data.recieve){
             this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
         }else{
-            console.log(data)
             let cur_state = {...this.state}
             cur_state.freq_arr = data.frame
             cur_state.update_time = this.getUpdateTime()
@@ -73,9 +72,11 @@ class Detector433 extends Component{
             let raw_data_arr = [...cur_state.raw_data]
             raw_data_arr.push({
                 data: data.raw_data,
-                time: this.getTime()
+                time: this.getTime(),
+                utc_time: +new Date
             })
-            cur_state.raw_data = raw_data_arr
+            raw_data_arr.sort((a, b) => {return a.utc_time - b.utc_time})
+            cur_state.raw_data = raw_data_arr.reverse()
             this.setState(state => ({
                 ...cur_state
             }))

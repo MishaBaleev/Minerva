@@ -1,16 +1,17 @@
 .det_common{
     height: calc(100% - 120px);
+    width: calc(100% - 160px);
     background-color: #888888;
-    padding-top: 120px;
+    padding: 120px 80px 0 80px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     align-content: space-around;
 
     .det_mon{
         padding: 10px 0;
         background-color: #676767;
-        width: 50%;
+        width: 40%;
         height: auto;
         border-radius: 5px;
         display: flex;
@@ -57,13 +58,48 @@
                     background-color: #ff0000;
                 }
             }
-            .anom_type{
-                p{
-                    margin: 0;
-                    color: whitesmoke;
-                    font-size: 20px;
-                    font-family: "JetBrains Mono";
+        }
+    }
 
+    .anom_type{
+        height: auto;
+        width: 25%;
+        background-color: #676767;
+        border-radius: 5px;
+        .title{
+            width: 100%;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            background-color: #4c4b4b;
+            border-radius: 5px 5px 0 0;
+            p{
+                margin: 0;
+                font-family: "JetBrains Mono";
+                font-size: 30px;
+                color: whitesmoke;
+            }
+        }
+        .description{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 0 20px;
+            p{
+                font-family: "JetBrains Mono";
+                font-size: 20px;
+                color: whitesmoke;
+                margin: 0;
+                &:first-child{
+                    margin-top: 20px;
+                }
+                &:not(:first-child){
+                    margin-top: 10px;
+                }
+                .item_name{
+                    color: #02d402;
+                    font-weight: 700;
                 }
             }
         }
@@ -277,9 +313,10 @@
     .map{
         width: 100%;
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
+        // padding: 0 80px;
         #map{
-            width: 50%;
+            width: 65%;
             height: 350px;
             border-radius: 5px;
         }

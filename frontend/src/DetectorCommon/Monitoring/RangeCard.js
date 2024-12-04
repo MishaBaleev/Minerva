@@ -50,9 +50,6 @@ const RangeCard = (props) => {
         <div className="analize good">
             <p>Нет аномалий</p>
         </div>
-        <div className="anom_type">
-            <p>Аномалия № 1</p>
-        </div>
     </div>
 }
 

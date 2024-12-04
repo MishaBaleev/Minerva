@@ -78,6 +78,15 @@ const DetectorCommon = (props) => {
         <Monitoring
 
         />
+        <div className="anom_type">
+            <div className="title">
+                <p>Возможная угроза</p>
+            </div>
+            <div className="description">
+                <p><span className="item_name">Название:</span> FPV-дрон</p>
+                <p><span className="item_name">Описание:</span> Управляемый оператором на расстоянии летательный аппарат тяжелее воздуха (дрон, беспилотник) с видеокамерой, передающей изображение оператору дрона</p>
+            </div>
+        </div>
         <ControlsCommon
             updateModal={props.updateModal}
             startSq={startSq}

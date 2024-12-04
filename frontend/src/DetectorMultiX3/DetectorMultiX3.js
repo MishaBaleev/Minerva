@@ -33,15 +33,17 @@ const DetectorMultiX3 = (props) => {
             let raw_data_arr = [...state.raw_data]
             raw_data_arr.push({
                 data: data.raw_data,
-                time: getUpdateTime()
+                time: this.getTime(),
+                utc_time: +new Date
             })
+            raw_data_arr.sort((a, b) => {return a.utc_time - b.utc_time})
             setState({
                 freq_arr_915: data.frame.arr915,
                 freq_arr_2400: data.frame.arr2400,
                 freq_arr_5800: data.frame.arr5800,
                 zone_state: data.zone_state,
                 update_time: getUpdateTime(),
-                raw_data: raw_data_arr
+                raw_data: raw_data_arr.reverse()
             })
             console.log(data)
         }

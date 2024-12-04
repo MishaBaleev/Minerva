@@ -49,13 +49,15 @@ class DetectorMultiX2 extends Component{
             let raw_data_arr = [...this.state.raw_data]
             raw_data_arr.push({
                 data: data.raw_data,
-                time: this.getTime()
+                time: this.getTime(),
+                utc_time: +new Date
             })
+            raw_data_arr.sort((a, b) => {return a.utc_time - b.utc_time})
             this.setState({
                 data915: data.frame.arr915,
                 data2400: data.frame.arr2400,
                 updateTime: this.getUpdateTime(),
-                raw_data: raw_data_arr
+                raw_data: raw_data_arr.reverse()
             })
             console.log(data)
         }

@@ -9,12 +9,12 @@ import { setStartCon5800 } from "../AppSlice";
 class Detector5800 extends Component{
     constructor(props){
         super(props)
+        this.range = ['5645', '5658', '5665', '5685', '5695', '5705', '5725', '5732', '5733', '5740', '5745', '5752', '5760', '5765', '5769', '5771', '5780', '5785', '5790', '5800', '5805', '5806', '5809', '5820', '5825', '5828', '5840', '5843', '5845', '5847', '5860', '5865', '5866', '5880', '5885', '5905', '5917', '5925', '5945']
 
         this.socket = new WebSocket("ws://127.0.0.1:8000/con_5800")
-        this.ranges = [[800, 850], [851, 901], [901, 920]]
 
         this.state = {
-            freq_arr: Array(101).fill(0),
+            freq_arr: Array(39).fill(0),
             gr_colors: {
                 graph: "#00ff00",
                 warning: "#ffff00",
@@ -65,7 +65,6 @@ class Detector5800 extends Component{
         if (data.recieve){
             this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
         }else{
-            console.log(data)
             let cur_state = {...this.state}
             cur_state.freq_arr = data.frame
             cur_state.update_time = this.getUpdateTime()
@@ -73,9 +72,11 @@ class Detector5800 extends Component{
             let raw_data_arr = [...cur_state.raw_data]
             raw_data_arr.push({
                 data: data.raw_data,
-                time: this.getTime()
+                time: this.getTime(),
+                utc_time: +new Date
             })
-            cur_state.raw_data = raw_data_arr
+            raw_data_arr.sort((a, b) => {return a.utc_time - b.utc_time})
+            cur_state.raw_data = raw_data_arr.reverse()
             this.setState(state => ({
                 ...cur_state
             }))
@@ -135,7 +136,7 @@ class Detector5800 extends Component{
                 <div className="graphs5800">
                     <p className="update">Обновлено в {this.state.update_time}</p>
                     <DetGraph5800
-                        xticks={Array(301).fill(0).map((_, index) => {return index+5645})}
+                        xticks={this.range}
                         data={this.state.freq_arr}
                         gr_colors={this.state.gr_colors}
                     />

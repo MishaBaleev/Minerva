@@ -48,6 +48,7 @@ class SerialReaderMultiClass():
 
     def getData(self):
         raw_data = self.session.readline().decode().replace("'", '"')
+        print(raw_data)
         if "Channel" in raw_data:
             self.raw_data.append(raw_data)
             arr915, arr2400 = self.parseData() 

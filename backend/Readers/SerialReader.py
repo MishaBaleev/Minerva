@@ -36,6 +36,7 @@ class SerialReaderClass():
         raw_data = self.session.readline()
         try:
             line_data = raw_data.decode().replace("'", '"')
+            print(line_data)
             if "Channel" in line_data:
                 json_data = json.loads(line_data)
                 self.parseData(json_data)
@@ -43,6 +44,6 @@ class SerialReaderClass():
                 self.freq_arr = [0 for i in range(82)]
                 return result, str(raw_data).replace("\n", "").replace("\r", "")
             else:
-                pass
+                return None, str(raw_data).replace("\n", "").replace("\r", "")
         except:
             return None, str(raw_data).replace("\n", "").replace("\r", "")

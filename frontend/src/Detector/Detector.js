@@ -69,6 +69,7 @@ class Detector extends Component{
 
     socOnMes(e){
         let data = JSON.parse(e.data)
+        
         if (data.recieve){
             this.props.updateModal(true, {title:"Ошибка", message:data.recieve})
         }else{
@@ -81,9 +82,11 @@ class Detector extends Component{
             let raw_data_arr = [...cur_state.raw_data]
             raw_data_arr.push({
                 data: data.raw_data,
-                time: this.getTime()
+                time: this.getTime(),
+                utc_time: +new Date
             })
-            cur_state.raw_data = raw_data_arr
+            raw_data_arr.sort((a, b) => {return a.utc_time - b.utc_time})
+            cur_state.raw_data = raw_data_arr.reverse()
             if (this.is_alg_test == true){
                 cur_state.alg_test_res = {...this.algTestRes(data.zone_state)}
             }
